@@ -689,6 +689,24 @@
     .withdraw-record-empty { min-height: 340px; display: grid; place-items: center; align-content: center; gap: 10px; color: #999; font-size: 10px; }
     .withdraw-record-empty[hidden] { display: none; }
     .withdraw-record-empty i { width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid #bbb; border-radius: 50%; background: #e8e8e8; font-style: normal; }
+    .search-results-scroll { padding-top: 12px; }
+    .search-query-summary { border: 1px solid #bbb; border-radius: 8px; background: #fff; padding: 13px 14px; }
+    .search-query-summary span { display: block; color: #777; font-size: 9px; }
+    .search-query-summary strong { display: block; margin-top: 5px; font-size: 15px; }
+    .search-result-section { margin-top: 14px; }
+    .search-result-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .search-result-section-head h2 { margin: 0; font-size: 13px; }
+    .search-result-section-head span { color: #888; font-size: 9px; }
+    .search-result-list { display: grid; gap: 8px; }
+    .search-result-item { width: 100%; display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px; border: 1px solid #c7c7c7; border-radius: 7px; background: #fff; color: #333; text-align: left; }
+    .search-result-preview { width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid #aaa; border-radius: 5px; background: #e8e8e8; color: #666; font-size: 9px; }
+    .search-result-copy { min-width: 0; }
+    .search-result-copy strong { display: block; overflow: hidden; font-size: 11px; line-height: 1.45; white-space: nowrap; text-overflow: ellipsis; }
+    .search-result-copy small { display: -webkit-box; margin-top: 4px; overflow: hidden; color: #777; font-size: 9px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .search-result-state { color: #555; font-size: 9px; white-space: nowrap; }
+    .search-result-empty { min-height: 410px; display: grid; place-items: center; align-content: center; gap: 10px; color: #888; font-size: 10px; text-align: center; }
+    .search-result-empty i { width: 58px; height: 58px; display: grid; place-items: center; border: 1px solid #bbb; border-radius: 50%; background: #e8e8e8; font-style: normal; font-size: 18px; }
+    .search-result-empty strong { color: #555; font-size: 12px; }
     .fans-summary { overflow: hidden; border: 1px solid #ccc; border-radius: 9px; background: #fff; }
     .fans-summary-main { display: grid; grid-template-columns: 1fr 92px; align-items: center; padding: 18px 16px; }
     .fans-summary-main span { display: block; color: #777; font-size: 11px; }
@@ -967,6 +985,7 @@
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".campaign-banner">Banner</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".category-nav">快捷商品频道</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target="#hotProductTitle">热门商品</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-overlay="search-results">搜索结果</button>
           <button class="tree-folder tree-subfolder" type="button" aria-expanded="true" data-tree-toggle="homeProductFlow">商品推广流程</button>
           <div class="tree-branch" data-tree-branch="homeProductFlow">
             <button class="tree-link tree-level-4" type="button" data-tree-overlay="detail">商品详情</button>
@@ -1016,7 +1035,7 @@
         <div class="statusbar"><span>9:41</span><span class="status-icons"><i class="signal"></i><i>▮▮</i><i class="battery"></i></span></div>
         <div class="navigation">
           <div class="brand-mark">黛</div>
-          <form class="search-row" data-search-form>
+          <form class="search-row" data-search-form data-search-scope="all">
             <div class="search-field"><button class="search-icon" type="submit" aria-label="搜索">⌕</button><input aria-label="搜索" name="query" placeholder="搜商品、直播、短视频"></div>
           </form>
           <div class="wx-capsule" aria-label="微信小程序原生菜单"><span>•••</span><i class="wx-divider"></i><span class="wx-dot">○</span></div>
@@ -1026,7 +1045,7 @@
       <header class="miniapp-header catalog-header" data-header="分类" hidden>
         <div class="statusbar"><span>9:41</span><span class="status-icons"><i class="signal"></i><i>▮▮</i><i class="battery"></i></span></div>
         <div class="catalog-capsule-row"><div class="wx-capsule" aria-label="微信小程序原生菜单"><span>•••</span><i class="wx-divider"></i><span class="wx-dot">○</span></div></div>
-        <form class="catalog-search-row" data-search-form>
+        <form class="catalog-search-row" data-search-form data-search-scope="product">
           <div class="catalog-search-field"><span class="search-icon">⌕</span><input aria-label="分类商品搜索" name="query" placeholder="请输入商品名称"></div>
           <button class="catalog-search-submit" type="submit">搜索</button>
         </form>
@@ -1039,7 +1058,7 @@
           <button class="media-tab active" type="button" role="tab" aria-selected="true" data-media-tab="直播">直播</button>
           <button class="media-tab" type="button" role="tab" aria-selected="false" data-media-tab="视频">视频</button>
         </div>
-        <form class="media-search-row" data-search-form>
+        <form class="media-search-row" data-search-form data-search-scope="media">
           <div class="media-search-field"><span class="search-icon">⌕</span><input aria-label="直播视频搜索" name="query" placeholder="搜索直播间或视频"></div>
           <button class="media-search-submit" type="submit">搜索</button>
         </form>
@@ -1052,7 +1071,7 @@
           <button class="circle-tab active" type="button" role="tab" aria-selected="true" data-circle-tab="带货发圈">带货发圈</button>
           <button class="circle-tab" type="button" role="tab" aria-selected="false" data-circle-tab="宣发">宣发</button>
         </div>
-        <form class="circle-search-row" data-search-form>
+        <form class="circle-search-row" data-search-form data-search-scope="circle">
           <div class="circle-search-field"><span class="search-icon">⌕</span><input aria-label="发圈素材搜索" name="query" placeholder="搜索商品或素材关键词"></div>
           <button class="circle-search-submit" type="submit">搜索</button>
         </form>
@@ -1433,6 +1452,14 @@
             <button class="help-support-button" type="button" data-action="跳转企业微信客服">联系官方客服</button>
           </section>
         </div>
+      </section>
+
+      <section class="relation-view" id="searchResultsView" aria-label="搜索结果" hidden>
+        <header class="personal-info-header">
+          <div class="statusbar"><span>9:41</span><span class="status-icons"><i class="signal"></i><i>▮▮</i><i class="battery"></i></span></div>
+          <div class="personal-info-navigation"><button class="personal-info-back" type="button" data-search-results-back aria-label="返回">‹</button><h1>搜索结果</h1><div class="wx-capsule" aria-label="微信小程序原生菜单"><span>•••</span><i class="wx-divider"></i><span class="wx-dot">○</span></div></div>
+        </header>
+        <div class="relation-scroll search-results-scroll" id="searchResultsContent" aria-live="polite"></div>
       </section>
 
       <section class="relation-view" id="tutorialView" aria-label="推客教程" hidden>
@@ -1889,6 +1916,12 @@
       '柔润洁面乳': { price: '¥89.00', income: '赚 ¥10.00', recommend: '推荐理由：温和清洁，适合日常高频推荐' },
       '紧致面霜组合': { price: '¥329.00', income: '赚 ¥39.00', recommend: '推荐理由：面霜组合装，适合紧致保湿需求' }
     };
+    const searchTypeLabels = {
+      product: { title: '商品', preview: '商品图', state: '查看 ›' },
+      live: { title: '直播', preview: '直播封面', state: '进入 ›' },
+      video: { title: '视频', preview: '视频封面', state: '播放 ›' },
+      circle: { title: '发圈素材', preview: '素材图', state: '查看 ›' }
+    };
     const prototypeUser = {
       loggedIn: false,
       hasLoginHistory: false,
@@ -1900,6 +1933,7 @@
       cumulativeIncome: 2350.80,
       withdrawnIncome: 1680.00,
       pendingIncome: 434.00,
+      withdrawalRequestSequence: 138,
       withdrawalMethod: '微信零钱',
       subscriptionRequested: false,
       subscriptionSharePromptShown: false,
@@ -1982,6 +2016,7 @@
 
     const annotationLabels = {
       home: '首页 · 商品卡关键热区',
+      'search-results': '搜索结果 · 分类结果与空状态',
       category: '分类页 · 无额外关键说明',
       'media-live': '直播列表 · 直播详情入口',
       'live-detail': '直播详情 · 微信原生分享边界',
@@ -2018,6 +2053,7 @@
 
     function restorePageAnnotation() {
       const relationContexts = [
+        ['searchResultsView', 'search-results'],
         ['tutorialView', 'tutorial'],
         ['withdrawRecordsView', 'withdraw-records'],
         ['commissionView', 'commission-details'],
@@ -2132,7 +2168,7 @@
     }
 
     function hideRelationViews(exceptId = null) {
-      ['tutorialView', 'withdrawRecordsView', 'commissionView', 'fansView', 'inviteView', 'inviteMessageView', 'inviteRegisterView'].forEach(viewId => {
+      ['searchResultsView', 'tutorialView', 'withdrawRecordsView', 'commissionView', 'fansView', 'inviteView', 'inviteMessageView', 'inviteRegisterView'].forEach(viewId => {
         if (viewId !== exceptId) document.getElementById(viewId).hidden = true;
       });
     }
@@ -2157,6 +2193,124 @@
 
     function openFansView() {
       openRelationView('fansView', 'fans', 'fans');
+    }
+
+    function getSearchItems(scope) {
+      const products = Object.entries(productCatalog).map(([title, product]) => ({
+        type: 'product',
+        title,
+        meta: `${product.price} · ${product.income} · ${product.recommend.replace('推荐理由：', '')}`,
+        searchable: `${title} ${product.price} ${product.income} ${product.recommend}`,
+        action: () => openProductDetail(title)
+      }));
+      const liveRooms = [...document.querySelectorAll('[data-live-room]')].map(card => ({
+        type: 'live',
+        title: card.dataset.liveRoom,
+        meta: `${card.dataset.liveAudience}推广 · ${card.dataset.liveRecommend}`,
+        searchable: card.textContent,
+        action: () => openLiveDetail(card.dataset.liveRoom, card.dataset.liveRecommend, card.dataset.liveAudience)
+      }));
+      const videos = [...document.querySelectorAll('.video-card')].map(card => ({
+        type: 'video',
+        title: card.querySelector('h3')?.textContent.trim() || '短视频',
+        meta: card.querySelector('.video-value-row')?.textContent.trim() || '微信视频号内容',
+        searchable: card.textContent,
+        action: () => notify(card.dataset.action || '跳转微信视频号')
+      }));
+      const circleItems = [...document.querySelectorAll('.circle-card')].map(card => ({
+        type: 'circle',
+        title: card.querySelector('.circle-author strong')?.textContent.trim() || '发圈素材',
+        meta: card.querySelector('.circle-copy')?.textContent.trim() || '发圈素材',
+        searchable: card.textContent,
+        action: () => {
+          closeSearchResults();
+          notify('已定位到匹配的发圈素材');
+        }
+      }));
+      if (scope === 'product') return products;
+      if (scope === 'media') return [...liveRooms, ...videos];
+      if (scope === 'circle') return circleItems;
+      return [...products, ...liveRooms, ...videos];
+    }
+
+    function renderSearchResults(query, scope) {
+      const content = document.getElementById('searchResultsContent');
+      const normalizedQuery = query.toLocaleLowerCase();
+      const matches = getSearchItems(scope).filter(item => item.searchable.toLocaleLowerCase().includes(normalizedQuery));
+      const summary = document.createElement('section');
+      summary.className = 'search-query-summary';
+      const summaryLabel = document.createElement('span');
+      summaryLabel.textContent = `搜索关键词 · 共 ${matches.length} 条结果`;
+      const summaryQuery = document.createElement('strong');
+      summaryQuery.textContent = `“${query}”`;
+      summary.append(summaryLabel, summaryQuery);
+      content.replaceChildren(summary);
+
+      if (!matches.length) {
+        const empty = document.createElement('div');
+        empty.className = 'search-result-empty';
+        const emptyIcon = document.createElement('i');
+        emptyIcon.textContent = '⌕';
+        const emptyTitle = document.createElement('strong');
+        emptyTitle.textContent = '未找到相关内容';
+        const emptyHint = document.createElement('span');
+        emptyHint.textContent = '请更换商品名、直播间或内容关键词';
+        empty.append(emptyIcon, emptyTitle, emptyHint);
+        content.append(empty);
+        return;
+      }
+
+      ['product', 'live', 'video', 'circle'].forEach(type => {
+        const groupedItems = matches.filter(item => item.type === type);
+        if (!groupedItems.length) return;
+        const section = document.createElement('section');
+        section.className = 'search-result-section';
+        const heading = document.createElement('div');
+        heading.className = 'search-result-section-head';
+        const title = document.createElement('h2');
+        title.textContent = searchTypeLabels[type].title;
+        const count = document.createElement('span');
+        count.textContent = `${groupedItems.length} 条`;
+        heading.append(title, count);
+        const list = document.createElement('div');
+        list.className = 'search-result-list';
+        groupedItems.forEach(item => {
+          const button = document.createElement('button');
+          button.className = 'search-result-item';
+          button.type = 'button';
+          const preview = document.createElement('span');
+          preview.className = 'search-result-preview';
+          preview.textContent = searchTypeLabels[type].preview;
+          const copy = document.createElement('span');
+          copy.className = 'search-result-copy';
+          const itemTitle = document.createElement('strong');
+          itemTitle.textContent = item.title;
+          const meta = document.createElement('small');
+          meta.textContent = item.meta;
+          copy.append(itemTitle, meta);
+          const state = document.createElement('span');
+          state.className = 'search-result-state';
+          state.textContent = searchTypeLabels[type].state;
+          button.append(preview, copy, state);
+          button.addEventListener('click', item.action);
+          list.append(button);
+        });
+        section.append(heading, list);
+        content.append(section);
+      });
+    }
+
+    function openSearchResults(query, scope = 'all') {
+      renderSearchResults(query, scope);
+      openRelationView('searchResultsView', 'search-results', 'search-results');
+    }
+
+    function closeSearchResults() {
+      document.getElementById('searchResultsView').hidden = true;
+      const activePage = document.querySelector('[data-page]:not([hidden])')?.dataset.page || '首页';
+      const treeRoot = document.querySelector(`[data-tree-page="${activePage}"][data-tree-root="true"]`);
+      if (treeRoot) setTreeActive(treeRoot);
+      restorePageAnnotation();
     }
 
     function setTutorialFilter(category) {
@@ -2231,6 +2385,52 @@
     function openWithdrawalRecordsView() {
       setWithdrawalRecordFilter('全部');
       openRelationView('withdrawRecordsView', 'withdraw-records', 'withdraw-records');
+    }
+
+    function addPendingWithdrawalRecord(amount, method, bankCard) {
+      prototypeUser.withdrawalRequestSequence += 1;
+      const card = document.createElement('article');
+      card.className = 'withdraw-record-card';
+      card.dataset.withdrawRecord = '处理中';
+      card.dataset.generatedWithdrawal = 'true';
+
+      const head = document.createElement('div');
+      head.className = 'withdraw-record-head';
+      const applicationTime = document.createElement('span');
+      applicationTime.textContent = '申请时间 刚刚';
+      const status = document.createElement('strong');
+      status.textContent = '处理中';
+      head.append(applicationTime, status);
+
+      const amounts = document.createElement('div');
+      amounts.className = 'withdraw-record-amounts';
+      [['申请金额', `¥${amount.toFixed(2)}`], ['税费/调整', '--'], ['实际到账', '--']].forEach(([label, value]) => {
+        const cell = document.createElement('div');
+        cell.className = 'withdraw-record-amount';
+        const cellLabel = document.createElement('span');
+        cellLabel.textContent = label;
+        const cellValue = document.createElement('strong');
+        cellValue.textContent = value;
+        cell.append(cellLabel, cellValue);
+        amounts.append(cell);
+      });
+
+      const meta = document.createElement('div');
+      meta.className = 'withdraw-record-meta';
+      const methodLabel = method === '银行卡' ? `银行卡（尾号 ${bankCard.slice(-4)}）` : '微信零钱';
+      const orderNumber = `TX20260723****${String(prototypeUser.withdrawalRequestSequence).padStart(4, '0')}`;
+      [['提现方式', methodLabel], ['提现单号', orderNumber], ['进度说明', '提现申请已提交，等待后台审核']].forEach(([label, value]) => {
+        const row = document.createElement('p');
+        const rowLabel = document.createElement('span');
+        rowLabel.textContent = label;
+        const rowValue = document.createElement('span');
+        rowValue.textContent = value;
+        row.append(rowLabel, rowValue);
+        meta.append(row);
+      });
+
+      card.append(head, amounts, meta);
+      document.querySelector('.withdraw-record-list').prepend(card);
     }
 
     function closeWithdrawalRecordsView() {
@@ -2901,6 +3101,9 @@
             switchPage('直播视频');
             switchMediaTab('直播');
             openLiveDetail();
+          } else if (overlayName === 'search-results') {
+            switchPage('首页');
+            openSearchResults('修护', 'all');
           } else if (overlayName === 'withdraw-sign') {
             switchPage('我的');
             prototypeUser.pendingAction = { type: 'withdrawal' };
@@ -2984,6 +3187,7 @@
     document.querySelector('[data-commission-back]').addEventListener('click', closeCommissionView);
     document.querySelector('[data-withdraw-records-entry]').addEventListener('click', beginWithdrawalRecords);
     document.querySelector('[data-withdraw-records-back]').addEventListener('click', closeWithdrawalRecordsView);
+    document.querySelector('[data-search-results-back]').addEventListener('click', closeSearchResults);
     document.querySelectorAll('[data-withdraw-record-filter]').forEach(item => {
       item.addEventListener('click', () => setWithdrawalRecordFilter(item.dataset.withdrawRecordFilter));
     });
@@ -3104,10 +3308,11 @@
         return;
       }
       prototypeUser.availableBalance = Number((prototypeUser.availableBalance - amount).toFixed(2));
-      prototypeUser.withdrawnIncome = Number((prototypeUser.withdrawnIncome + amount).toFixed(2));
+      addPendingWithdrawalRecord(amount, prototypeUser.withdrawalMethod, bankCard);
       updateMyPage();
       closeWithdrawView();
-      notify(`提现申请已提交：¥${amount.toFixed(2)}`);
+      openWithdrawalRecordsView();
+      notify(`提现申请已提交，等待审核：¥${amount.toFixed(2)}`);
     });
     document.querySelector('[data-personal-back]').addEventListener('click', closePersonalInfo);
     document.querySelectorAll('[data-personal-action]').forEach(item => {
@@ -3238,6 +3443,8 @@
       prototypeUser.subscriptionPromptMode = null;
       prototypeUser.availableBalance = 236.80;
       prototypeUser.withdrawnIncome = 1680.00;
+      prototypeUser.withdrawalRequestSequence = 138;
+      document.querySelectorAll('[data-generated-withdrawal]').forEach(item => item.remove());
       prototypeUser.currentProduct = '臻润修护精华套装';
       prototypeUser.pendingAction = null;
       myEarningsVisible = true;
@@ -3260,7 +3467,11 @@
       form.addEventListener('submit', event => {
         event.preventDefault();
         const query = new FormData(event.currentTarget).get('query').trim();
-        notify(query ? `搜索：${query}` : '请输入搜索关键词');
+        if (!query) {
+          notify('请输入搜索关键词');
+          return;
+        }
+        openSearchResults(query, event.currentTarget.dataset.searchScope || 'all');
       });
     });
 
