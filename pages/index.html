@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黛莱皙推客带货平台 · 文档与原型</title>
+  <style>
+    :root { color-scheme: light; --ink: #22201d; --muted: #6f6961; --line: #ded8cf; --paper: #f7f3eb; --card: #fffdf9; --brand: #a12a30; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+    main { width: min(940px, calc(100% - 40px)); margin: 0 auto; padding: 88px 0; }
+    .eyebrow { margin: 0 0 18px; color: var(--brand); font: 600 12px/1.4 Consolas, monospace; letter-spacing: .16em; }
+    h1 { max-width: 760px; margin: 0; font-family: "Songti SC", "STSong", serif; font-size: clamp(40px, 7vw, 72px); line-height: 1.08; letter-spacing: -.03em; }
+    .lead { max-width: 650px; margin: 24px 0 52px; color: var(--muted); font-size: 17px; line-height: 1.8; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    a { position: relative; min-height: 220px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: inherit; background: var(--card); text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+    a:hover { z-index: 1; transform: translateY(-4px); box-shadow: 0 20px 44px rgba(43, 35, 29, .1); }
+    a small { display: block; margin-bottom: 34px; color: var(--brand); font: 600 10px/1.4 Consolas, monospace; letter-spacing: .13em; }
+    a strong { display: block; margin-bottom: 13px; font-family: "Songti SC", "STSong", serif; font-size: 24px; }
+    a span { color: var(--muted); font-size: 14px; line-height: 1.7; }
+    a i { position: absolute; right: 24px; bottom: 22px; color: var(--brand); font-style: normal; font-size: 20px; }
+    footer { margin-top: 28px; color: #90887e; font-size: 12px; }
+    @media (max-width: 760px) { main { padding: 56px 0; } .grid { grid-template-columns: 1fr; } a { min-height: 180px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">DLS / PRODUCT REVIEW</p>
+    <h1>需求文档与交互原型</h1>
+    <p class="lead">分别打开完整 PRD、小程序原型和运营后台原型。文档在 GitHub 中阅读，原型在 GitHub Pages 中直接操作。</p>
+    <section class="grid" aria-label="查看入口">
+      <a href="https://github.com/ZhangRulei/dailaixi-promoter-platform/blob/main/outputs/%E9%BB%9B%E8%8E%B1%E7%9A%99%E6%8E%A8%E5%AE%A2%E5%B8%A6%E8%B4%A7%E5%B9%B3%E5%8F%B0_PRD_%E5%86%B3%E7%AD%96%E8%90%BD%E5%9C%B0%E7%89%88_2026-07-21/%E9%BB%9B%E8%8E%B1%E7%9A%99%E6%8E%A8%E5%AE%A2%E5%B8%A6%E8%B4%A7%E5%B9%B3%E5%8F%B0_%E4%BA%A7%E5%93%81%E6%80%BB%E7%BA%B2%E4%B8%8EPRD_%E5%90%88%E5%B9%B6%E7%89%88.md">
+        <small>DOCUMENT / 01</small><strong>合并版 PRD</strong><span>产品总纲、核心流程、小程序与运营后台需求。</span><i>↗</i>
+      </a>
+      <a href="./prototype/homepage-lowfi/">
+        <small>PROTOTYPE / 02</small><strong>小程序原型</strong><span>直接体验首页、商品、直播视频、发圈、我的及全局流程。</span><i>→</i>
+      </a>
+      <a href="./prototype/admin-lowfi/">
+        <small>PROTOTYPE / 03</small><strong>运营后台原型</strong><span>查看内容、推客、订单、财务、授权、系统及账户管理。</span><i>→</i>
+      </a>
+    </section>
+    <footer>PRIVATE REPOSITORY · 仅向已获授权的成员提供文档访问</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "dailaixi-homepage-lowfi-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "prototype": "node server.cjs"
+  }
+}
