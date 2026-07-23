@@ -4,7 +4,7 @@
 
 ## 在线查看
 
-- [产品总纲与 PRD](./outputs/黛莱皙推客带货平台_PRD_决策落地版_2026-07-21/黛莱皙推客带货平台_产品总纲与PRD_合并版.md)
+- [最新版 PRD（v3.4）](./outputs/黛莱皙推客带货平台_PRD_决策落地版_2026-07-21/黛莱皙推客带货平台_PRD_重写版_v3.4_0-1项目_本地评审稿.md)
 - [测试用例](./outputs/黛莱皙推客带货平台_PRD_决策落地版_2026-07-21/黛莱皙推客带货平台_测试用例.md)
 - [小程序低保真交互原型](https://zhangrulei.github.io/dailaixi-promoter-platform/prototype/homepage-lowfi/)
 - [小程序高保真 UI 概念稿（首页 / 我的）](https://zhangrulei.github.io/dailaixi-promoter-platform/prototype/miniapp-highfi/)
@@ -13,7 +13,7 @@
 
 ## 修改方式
 
-- 需求调整：直接修改合并版 Markdown。
+- 需求调整：直接修改最新版 PRD Markdown。
 - 测试用例：修改测试用例 Markdown，并保持编号连续。
 - 小程序原型：修改 `prototype/homepage-lowfi/`。
 - 小程序高保真 UI：修改 `prototype/miniapp-highfi/`。
