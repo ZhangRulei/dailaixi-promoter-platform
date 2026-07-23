@@ -1125,7 +1125,7 @@ flowchart LR
 
 ### D. 相关文档
 
-- [原始合并版 PRD](./黛莱皙推客带货平台_产品总纲与PRD_合并版.md)
+- 原始合并版 PRD（仅作为本地历史资料，不在 GitHub 发布）
 - [测试用例](./黛莱皙推客带货平台_测试用例.md)
 - [微信小程序低保真原型](https://zhangrulei.github.io/dailaixi-promoter-platform/prototype/homepage-lowfi/)
 - [运营后台低保真原型](https://zhangrulei.github.io/dailaixi-promoter-platform/prototype/admin-lowfi/)
