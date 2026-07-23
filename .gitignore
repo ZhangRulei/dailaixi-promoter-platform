@@ -1,4 +1,4 @@
-# 此仓库只发布合并版 PRD、测试用例、两个当前原型和 Pages 入口。
+# 此仓库只发布合并版 PRD、测试用例、当前原型和 Pages 入口。
 /*
 
 !/.gitignore
@@ -16,6 +16,8 @@
 /prototype/*
 !/prototype/homepage-lowfi/
 !/prototype/homepage-lowfi/**
+!/prototype/miniapp-highfi/
+!/prototype/miniapp-highfi/**
 !/prototype/admin-lowfi/
 !/prototype/admin-lowfi/**
 
