@@ -29,7 +29,6 @@ jobs:
           mkdir -p _site/prototype
           cp pages/index.html _site/index.html
           cp -R prototype/homepage-lowfi _site/prototype/homepage-lowfi
-          cp -R prototype/miniapp-highfi _site/prototype/miniapp-highfi
           cp -R prototype/admin-lowfi _site/prototype/admin-lowfi
           find _site -name README.md -delete
           find _site -name package.json -delete
