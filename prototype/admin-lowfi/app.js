@@ -19,7 +19,7 @@
     }, []);
   }
 
-  var state = { module: 'home', sub: 'overview', decorationTab: 'banner', selectedPrimary: '护肤', pendingAction: null, drawerAction: null, pages: {}, pageSizes: {} };
+  var state = { module: 'home', sub: 'overview', decorationTab: 'home', selectedPrimary: '护肤', pendingAction: null, drawerAction: null, pages: {}, pageSizes: {} };
   var productState = [
     { listed: true, recommended: true, sort: 1, reason: '修护维稳，适合换季分享', price: 199, commissionRate: 12, store: '黛莱皙官方旗舰店', category: '护肤', secondaryCategory: '精华' },
     { listed: true, recommended: true, sort: 2, reason: '清爽水润，日常护肤组合', price: 269, commissionRate: 12, store: '黛莱皙官方旗舰店', category: '套装', secondaryCategory: '护肤套装' },
@@ -27,14 +27,15 @@
     { listed: false, recommended: false, sort: '', reason: '', price: 89, commissionRate: 10, store: '黛莱皙官方旗舰店', category: '护肤', secondaryCategory: '洁面' }
   ];
   var liveState = [
-    { listed: true, script: '换季护肤别着急，今晚来黛莱皙直播间一起选适合自己的修护方案。\n\n夏季护肤怎么选？进入直播间看搭配建议和使用方法。\n\n黛莱皙夏季护肤专场正在直播，点击进入直播间边看边选。', scriptCount: 3 },
-    { listed: false, script: '', scriptCount: 0 },
-    { listed: false, script: '清洁和补水怎么搭配？进入直播间查看完整护肤步骤。\n\n日常清洁有哪些容易忽略的细节？直播间为你一次讲清。\n\n清洁与补水课堂回顾，进入直播间查看本场内容。', scriptCount: 3 }
+    { listed: true, recommended: true, sort: 1, script: '换季护肤别着急，今晚来黛莱皙直播间一起选适合自己的修护方案。\n\n夏季护肤怎么选？进入直播间看搭配建议和使用方法。\n\n黛莱皙夏季护肤专场正在直播，点击进入直播间边看边选。', scriptCount: 3 },
+    { listed: false, recommended: false, sort: 2, script: '', scriptCount: 0 },
+    { listed: false, recommended: false, sort: null, script: '清洁和补水怎么搭配？进入直播间查看完整护肤步骤。\n\n日常清洁有哪些容易忽略的细节？直播间为你一次讲清。\n\n清洁与补水课堂回顾，进入直播间查看本场内容。', scriptCount: 3 }
   ];
   var videoState = [
-    { listed: true, sort: 1 },
-    { listed: true, sort: 2 },
-    { listed: false, sort: null }
+    { listed: true, recommended: true, sort: 1, category: '个护美妆' },
+    { listed: true, recommended: true, sort: 2, category: '食品饮料' },
+    { listed: true, recommended: true, sort: 3, category: '家清日用' },
+    { listed: false, recommended: false, sort: null, category: '水果生鲜' }
   ];
   var circleState = [
     { id: 'FQ-0722-01', content: '换季修护别着急，清洁补水按顺序来…', type: '带货发圈', materialCount: 3, product: '臻润修护精华套装', productId: 'SPU 1003821', listed: true, sort: 1, updated: '07-22 16:30' },
@@ -116,6 +117,20 @@
     { name: '套装', icon: 'set.png', path: '/pages/goods/list?channel=set', enabled: true },
     { name: '全部', icon: 'all.png', path: '/pages/goods/list', enabled: true }
   ];
+  var homeMixedState = {
+    enabled: true,
+    cards: [
+      { title: '修护精选', products: ['臻润修护精华套装', '紧致焕颜面霜组合'], stickers: ['repair-serum-sticker.png', 'firming-cream-sticker.png'] },
+      { title: '补水套装', products: ['焕亮水乳护肤礼盒', '净透清洁护理套装'], stickers: ['hydration-set-sticker.png', 'cleanse-set-sticker.png'] }
+    ]
+  };
+  var homeLiveSectionState = { enabled: true };
+  var homeVideoSectionState = { enabled: true };
+  var floatingWindowState = {
+    icon: 'home-floating-guide.png',
+    path: '/pages/tutorial/index',
+    enabled: true
+  };
   var shareCopyState = '邀请好友一起成为黛莱皙推广大使，分享好物，轻松获得推广收益。';
   var sharePosterState = [
     { title: '品牌邀请海报', media: 'share-poster-brand.jpg', enabled: true },
@@ -362,21 +377,23 @@
     'content:live': {
       title: '直播管理', subtitle: '管理直播、预告、话术与直播爆品',
       keyword: '直播间 / 视频号', statuses: ['全部状态', '直播中', '待开播', '已结束', '已上架', '已下架'],
-      columns: ['直播间', '直播状态', '上架状态', '开播时间', '主推商品', '分享话术', '排序', '操作'],
+      columns: ['直播间', '直播状态', '上架状态', '开播时间', '主推商品', '分享话术', '首页热门 / 排序', '操作'],
       rows: [
-        [entity('黛莱皙夏季护肤专场', '黛莱皙官方视频号', '播'), status('直播中', 'filled'), status('已上架', 'filled'), '今天 14:00', '3 件', '3 条', '1', '查看'],
-        [entity('换季修护主题直播', '黛莱皙官方视频号', '播'), status('待开播', 'dashed'), status('已下架', 'dashed'), '07-23 19:30', '4 件', '未配置', '2', '编辑'],
+        [entity('黛莱皙夏季护肤专场', '黛莱皙官方视频号', '播'), status('直播中', 'filled'), status('已上架', 'filled'), '今天 14:00', '3 件', '3 条', '已推荐 · #1', '查看'],
+        [entity('换季修护主题直播', '黛莱皙官方视频号', '播'), status('待开播', 'dashed'), status('已下架', 'dashed'), '07-23 19:30', '4 件', '未配置', '未推荐 · #2', '编辑'],
         [entity('清洁与补水课堂', '黛莱皙官方视频号', '播'), status('已结束', ''), status('已下架', 'dashed'), '07-21 20:00', '3 件', '3 条', '—', '查看']
       ]
     },
     'content:video': {
-      title: '视频管理', subtitle: '视频卡点击后直接跳转对应视频号视频',
-      keyword: '视频标题 / 视频号', statuses: ['全部状态', '已上架', '已下架'],
-      columns: ['视频', '视频号', '时长', '上架状态', '人工排序', '最近同步', '操作'],
+      title: '视频管理', subtitle: '商品类目随关联主推商品自动带入，视频卡点击后直达视频号',
+      keyword: '视频标题 / 视频号 / 关联商品', statuses: ['全部状态', '已上架', '已下架'],
+      videoCategories: ['个护美妆', '食品饮料', '家清日用', '水果生鲜', '其他'],
+      columns: ['视频', '视频号', '关联商品 / 类目', '时长', '上架状态', '首页热门 / 排序', '最近同步', '操作'],
       rows: [
-        [entity('防晒乳正确使用方法', '视频 ID V2026072201', '视'), '黛莱皙官方', '00:52', status('已上架', 'filled'), '1', '2026-12-31', '操作'],
-        [entity('水乳搭配使用顺序', '视频 ID V2026072107', '视'), '黛莱皙官方', '01:18', status('已上架', 'filled'), '2', '2026-12-31', '操作'],
-        [entity('温和洁面技巧', '视频 ID V2026071903', '视'), '合作达人', '00:46', status('已下架', 'dashed'), '—', '07-21 00:05', '操作']
+        [entity('防晒乳正确使用方法', '视频 ID V2026072201', '视'), '黛莱皙官方', '<span class="source-store"><strong>若泉防晒乳 SPF50+</strong><small>个护美妆</small></span>', '00:52', status('已上架', 'filled'), '已推荐 · #1', '2026-12-31', '操作'],
+        [entity('黑猪肉小笼包早餐分享', '视频 ID V2026072107', '视'), '黛莱皙官方', '<span class="source-store"><strong>黑猪肉小笼包家庭装</strong><small>食品饮料</small></span>', '01:18', status('已上架', 'filled'), '已推荐 · #2', '2026-12-31', '操作'],
+        [entity('地板清洁强力去污', '视频 ID V2026071903', '视'), '合作达人', '<span class="source-store"><strong>沫檬地板清洁剂</strong><small>家清日用</small></span>', '00:46', status('已上架', 'filled'), '已推荐 · #3', '07-21 00:05', '操作'],
+        [entity('阳光玫瑰现摘开箱', '视频 ID V2026071808', '视'), '黛莱皙官方', '<span class="source-store"><strong>阳光玫瑰葡萄礼盒</strong><small>水果生鲜</small></span>', '01:06', status('已下架', 'dashed'), '—', '07-20 18:30', '操作']
       ]
     },
     'content:circle': {
@@ -514,6 +531,7 @@
     var statusOptions = (config.statuses || ['全部状态']).map(function (item) { return '<option value="' + escapeHTML(item) + '">' + escapeHTML(item) + '</option>'; }).join('');
     var isWithdrawalReview = key === 'finance:withdrawals';
     var isProductList = key === 'content:products';
+    var isVideoList = key === 'content:video';
     var hasPendingWithdrawal = isWithdrawalReview && config.rows.some(function (row) { return stripHTML(row[6]) === '待处理'; });
     var selectionHead = isWithdrawalReview
       ? '<th class="selection-cell"><input type="checkbox" data-withdraw-select-all aria-label="全选待审核申请" ' + (hasPendingWithdrawal ? '' : 'disabled') + '></th>'
@@ -541,6 +559,7 @@
             var live = liveState[rowIndex];
             return '<td><div class="table-actions live-actions">' +
               '<button type="button" class="button small" data-live-action="shelf" data-row-index="' + rowIndex + '">' + (live.listed ? '下架' : '上架') + '</button>' +
+              '<button type="button" class="button small" data-live-action="recommend" data-row-index="' + rowIndex + '">' + (live.recommended ? '取消热门' : '推荐上热门') + '</button>' +
               '<button type="button" class="button small" data-live-action="script" data-row-index="' + rowIndex + '">分享话术</button>' +
               '<button type="button" class="button small" data-row-action data-table-key="' + key + '" data-row-index="' + rowIndex + '">' + escapeHTML(stripHTML(cell)) + '</button>' +
               '</div></td>';
@@ -549,6 +568,7 @@
             var video = videoState[rowIndex];
             return '<td><div class="table-actions video-actions">' +
               '<button type="button" class="button small" data-video-action="shelf" data-row-index="' + rowIndex + '">' + (video.listed ? '下架' : '上架') + '</button>' +
+              '<button type="button" class="button small" data-video-action="recommend" data-row-index="' + rowIndex + '">' + (video.recommended ? '取消热门' : '推荐上热门') + '</button>' +
               '<button type="button" class="button small" data-video-action="sort" data-row-index="' + rowIndex + '">排序</button>' +
               '</div></td>';
           }
@@ -621,7 +641,10 @@
       categoryFilter = '<select data-filter-primary-category aria-label="一级分类"><option value="">全部一级分类</option>' + categoryState.map(function (category) { return '<option value="' + escapeHTML(category.name) + '">' + escapeHTML(category.name) + '</option>'; }).join('') + '</select>' +
         '<select data-filter-secondary-category aria-label="二级分类"><option value="">全部二级分类</option>' + secondaryCategoryState.map(function (category) { return '<option value="' + escapeHTML(category.name) + '">' + escapeHTML(category.parent + ' / ' + category.name) + '</option>'; }).join('') + '</select>';
     }
-    var filters = '<div class="filters"><input type="search" data-filter-keyword placeholder="' + escapeHTML(config.keyword || '请输入关键词') + '">' + storeFilter + categoryFilter + '<select data-filter-status>' + statusOptions + '</select><button type="button" class="button primary" data-filter-submit>查询</button><button type="button" class="button" data-filter-reset>重置</button><span class="spacer"></span>' + tableToolbarActions(key) + '</div>';
+    var videoCategoryFilter = isVideoList
+      ? '<select data-filter-video-category aria-label="商品一级分类"><option value="">全部商品分类</option>' + config.videoCategories.map(function (category) { return '<option value="' + escapeHTML(category) + '">' + escapeHTML(category) + '</option>'; }).join('') + '</select>'
+      : '';
+    var filters = '<div class="filters"><input type="search" data-filter-keyword placeholder="' + escapeHTML(config.keyword || '请输入关键词') + '">' + storeFilter + categoryFilter + videoCategoryFilter + '<select data-filter-status>' + statusOptions + '</select><button type="button" class="button primary" data-filter-submit>查询</button><button type="button" class="button" data-filter-reset>重置</button><span class="spacer"></span>' + tableToolbarActions(key) + '</div>';
     var table = '<div class="table-wrap"><table class="data-table" data-table="' + key + '"><thead><tr>' + head + '</tr></thead><tbody>' + body + '</tbody></table></div>';
     var total = tableTotals[key] || config.rows.length;
     var pageSize = state.pageSizes[key] || 20;
@@ -661,6 +684,71 @@
     else targetInput.placeholder = '请输入小程序页面路径';
   }
 
+  function homeDecorationWorkspace() {
+    var productCatalog = ['臻润修护精华套装', '焕亮水乳护肤礼盒', '净透清洁护理套装', '紧致焕颜面霜组合', '舒缓修护精华液', '盈润保湿面膜套装'];
+    var cardOne = homeMixedState.cards[0] || { title: '', products: ['', ''], stickers: ['', ''] };
+    var cardTwo = homeMixedState.cards[1] || { title: '', products: ['', ''], stickers: ['', ''] };
+    var recommendedLives = liveState.map(function (live, index) {
+      return { live: live, title: liveNameAt(index) };
+    }).filter(function (item) {
+      return item.live.listed && item.live.recommended;
+    }).sort(function (a, b) {
+      return (a.live.sort == null ? Number.MAX_SAFE_INTEGER : a.live.sort) - (b.live.sort == null ? Number.MAX_SAFE_INTEGER : b.live.sort);
+    });
+    var recommendedLiveNames = recommendedLives.map(function (item) { return item.title; });
+    var recommendedVideos = videoState.map(function (video, index) {
+      return { video: video, title: videoNameAt(index) };
+    }).filter(function (item) {
+      return item.video.listed && item.video.recommended;
+    }).sort(function (a, b) {
+      return (a.video.sort == null ? Number.MAX_SAFE_INTEGER : a.video.sort) - (b.video.sort == null ? Number.MAX_SAFE_INTEGER : b.video.sort);
+    });
+    var previewVideoCards = recommendedVideos.slice(0, 3).map(function (item) {
+      return '<i><span>▶</span><strong>' + escapeHTML(item.title) + '</strong></i>';
+    }).join('');
+    if (!previewVideoCards) previewVideoCards = '<p>暂无已推荐短视频</p>';
+    cardOne.stickers = cardOne.stickers || ['', ''];
+    cardTwo.stickers = cardTwo.stickers || ['', ''];
+    var cardTwoConfigured = !!(cardTwo.title || (cardTwo.products || []).some(Boolean) || cardTwo.stickers.some(Boolean));
+    function productOptions(current) {
+      return '<option value="">选择商品</option>' + productCatalog.map(function (product) {
+        return '<option value="' + escapeHTML(product) + '" ' + (product === current ? 'selected' : '') + '>' + escapeHTML(product) + '</option>';
+      }).join('');
+    }
+    function stickerField(slot, current) {
+      return '<label class="home-decoration-file"><input type="file" accept="image/*" data-home-sticker="' + slot + '" data-current-file="' + escapeHTML(current || '') + '"><span data-home-file-name="' + slot + '">' + escapeHTML(current || '上传贴图') + '</span></label>';
+    }
+    function productSlot(cardIndex, productIndex, product, sticker) {
+      var slot = cardIndex + '-' + productIndex;
+      return '<div class="home-product-slot"><span>商品 ' + (productIndex === 0 ? 'A' : 'B') + '</span><select data-home-product="' + slot + '">' + productOptions(product) + '</select>' + stickerField(slot, sticker) + '</div>';
+    }
+    var effectiveLiveEnabled = homeLiveSectionState.enabled && recommendedLives.length > 0;
+    var mixedClass = !effectiveLiveEnabled && homeMixedState.enabled ? ' live-hidden' : effectiveLiveEnabled && !homeMixedState.enabled ? ' products-hidden' : '';
+    var mixedHidden = !effectiveLiveEnabled && !homeMixedState.enabled ? ' hidden' : '';
+    return '<div class="home-decoration-workspace" data-home-decoration-root data-home-live-available="' + (recommendedLives.length > 0) + '">' +
+      '<section class="home-decoration-settings">' +
+      '<header class="home-decoration-title"><div><h2>首页装修</h2><p>模块开关与首页内容配置</p></div></header>' +
+      '<div class="home-decoration-setting-body">' +
+      '<section class="home-setting-block home-setting-fields"><header><span><strong>悬浮窗</strong><small>图标与跳转 · 滚动时隐藏</small></span><label><input type="checkbox" data-home-floating-enabled ' + (floatingWindowState.enabled ? 'checked' : '') + '> 启用</label></header>' +
+      '<div class="home-setting-grid"><label><span>悬浮窗图标</span><span class="home-decoration-file wide"><input type="file" accept="image/*" data-home-floating-icon data-current-file="' + escapeHTML(floatingWindowState.icon || '') + '"><span data-home-floating-file-name>' + escapeHTML(floatingWindowState.icon || '上传图标') + '</span></span></label><label><span>跳转地址</span><input type="text" data-home-floating-path value="' + escapeHTML(floatingWindowState.path || '') + '" placeholder="/pages/tutorial/index"></label></div>' +
+      '</section>' +
+      '<section class="home-setting-block home-setting-source"><header><span><strong>热门直播</strong><small>内容管理推荐</small></span><label><input type="checkbox" data-home-live-enabled ' + (homeLiveSectionState.enabled ? 'checked' : '') + '> 启用</label></header><div class="home-source-summary"><strong>' + recommendedLives.length + ' 场已推荐</strong><span>在“内容管理 / 直播管理”推荐或取消</span></div></section>' +
+      '<section class="home-setting-block home-setting-fields"><header><span><strong>商品卡</strong><small>最多 2 张主题卡</small></span><label><input type="checkbox" data-home-mixed-enabled ' + (homeMixedState.enabled ? 'checked' : '') + '> 启用</label></header>' +
+      '<div class="home-product-card-list"><div class="home-product-card-config"><header><strong>商品卡 1</strong><small>必填</small></header><input class="home-card-title-input" data-home-card-title="0" value="' + escapeHTML(cardOne.title) + '" placeholder="商品卡标题">' + productSlot(0, 0, cardOne.products[0], cardOne.stickers[0]) + productSlot(0, 1, cardOne.products[1], cardOne.stickers[1]) + '</div>' +
+      '<div class="home-product-card-config"><header><strong>商品卡 2</strong><small>选填，填写后需完整</small></header><input class="home-card-title-input" data-home-card-title="1" value="' + escapeHTML(cardTwo.title) + '" placeholder="商品卡标题">' + productSlot(1, 0, cardTwo.products[0], cardTwo.stickers[0]) + productSlot(1, 1, cardTwo.products[1], cardTwo.stickers[1]) + '</div></div>' +
+      '</section>' +
+      '<section class="home-setting-block home-setting-source"><header><span><strong>热门短视频</strong><small>内容管理推荐</small></span><label><input type="checkbox" data-home-video-enabled ' + (homeVideoSectionState.enabled ? 'checked' : '') + '> 启用</label></header><div class="home-source-summary"><strong>' + recommendedVideos.length + ' 条已推荐</strong><span>在“内容管理 / 视频管理”推荐或取消</span></div></section>' +
+      '</div>' +
+      '<footer class="home-decoration-savebar"><span data-home-decoration-hint>修改尚未保存</span><button class="button primary" type="button" data-home-decoration-save>保存首页装修</button></footer>' +
+      '</section>' +
+      '<aside class="home-decoration-preview-pane"><header><div><strong>小程序首页预览</strong><small>随左侧配置实时更新</small></div><span>375 × 812</span></header>' +
+      '<div class="home-preview-phone"><div class="home-preview-status">9:41　⌁ ▰</div><div class="home-preview-search">黛　　搜索商品、直播、短视频　•••</div><div class="home-preview-banner">首页 Banner</div><div class="home-preview-channels"><i>爆款</i><i>新品</i><i>护肤</i><i>彩妆</i><i>套装</i></div>' +
+      '<div class="home-preview-mixed' + mixedClass + '" data-home-preview-mixed' + mixedHidden + '><section class="home-preview-live" data-home-preview-live ' + (effectiveLiveEnabled ? '' : 'hidden') + '><header><strong>热门直播</strong><span>查看更多 &gt;</span></header><div class="home-preview-live-cover"><span>直播封面轮播</span><small data-home-preview-live-names>' + escapeHTML(recommendedLiveNames.join(' / ') || '暂无已推荐直播') + '</small><em>主播头像　主播昵称　赚 xx</em></div></section><div class="home-preview-product-cards' + (cardTwoConfigured ? '' : ' single-card') + '" data-home-preview-products ' + (homeMixedState.enabled ? '' : 'hidden') + '><section data-home-preview-card="0"><strong data-home-preview-card-title="0">' + escapeHTML(cardOne.title || '商品卡 1') + '</strong><div><i data-home-preview-sticker="0-0">' + escapeHTML(cardOne.stickers[0] || '贴图 A') + '</i><i data-home-preview-sticker="0-1">' + escapeHTML(cardOne.stickers[1] || '贴图 B') + '</i></div></section><section data-home-preview-card="1" ' + (cardTwoConfigured ? '' : 'hidden') + '><strong data-home-preview-card-title="1">' + escapeHTML(cardTwo.title || '商品卡 2') + '</strong><div><i data-home-preview-sticker="1-0">' + escapeHTML(cardTwo.stickers[0] || '贴图 A') + '</i><i data-home-preview-sticker="1-1">' + escapeHTML(cardTwo.stickers[1] || '贴图 B') + '</i></div></section></div></div>' +
+      '<section class="home-preview-videos" data-home-preview-videos ' + (homeVideoSectionState.enabled ? '' : 'hidden') + '><header><strong>热门短视频</strong><span>更多短视频 &gt;</span></header><div>' + previewVideoCards + '</div></section>' +
+      '<div class="home-preview-hot"><strong>热门商品</strong><span>商品卡片</span><span>商品卡片</span></div><div class="home-preview-floating" data-home-preview-floating><i>图标</i><span>悬浮窗</span></div><div class="home-preview-tabbar">首页　分类　直播视频　发圈　我的</div></div>' +
+      '</aside></div>';
+  }
+
   function pageDecoration() {
     function actionCell(type, index, total, enabled) {
       return '<div class="decoration-actions">' +
@@ -674,6 +762,18 @@
         '<button class="link-action" type="button" data-decoration-action="toggle" data-decoration-type="' + type + '" data-row-index="' + index + '">' + (enabled ? '停用' : '启用') + '</button>' +
         '<button class="link-action danger" type="button" data-decoration-action="delete" data-decoration-type="' + type + '" data-row-index="' + index + '">删除</button>' +
         '</div></div>';
+    }
+    function floatingActionCell(enabled) {
+      return '<div class="decoration-ops">' +
+        '<button class="link-action" type="button" data-decoration-action="edit" data-decoration-type="floating" data-row-index="0">编辑</button>' +
+        '<button class="link-action" type="button" data-decoration-action="toggle" data-decoration-type="floating" data-row-index="0">' + (enabled ? '停用' : '启用') + '</button>' +
+        '</div>';
+    }
+    function mixedActionCell(enabled) {
+      return '<div class="decoration-ops">' +
+        '<button class="link-action" type="button" data-decoration-action="edit" data-decoration-type="mixed" data-row-index="0">编辑</button>' +
+        '<button class="link-action" type="button" data-decoration-action="toggle" data-decoration-type="mixed" data-row-index="0">' + (enabled ? '停用' : '启用') + '</button>' +
+        '</div>';
     }
     var bannerRows = bannerState.map(function (item, index) {
       return '<tr>' +
@@ -689,34 +789,168 @@
         '<td>' + status(item.enabled ? '已启用' : '已停用', item.enabled ? 'filled' : 'dashed') + '</td>' +
         '<td>' + actionCell('channel', index, channelState.length, item.enabled) + '</td></tr>';
     }).join('');
-    var activeTab = state.decorationTab === 'channel' ? 'channel' : 'banner';
+    var allowedTabs = ['banner', 'channel', 'home'];
+    var activeTab = allowedTabs.indexOf(state.decorationTab) > -1 ? state.decorationTab : 'banner';
     var createLabel = activeTab === 'banner' ? '新增 Banner' : '新增频道';
-    var count = activeTab === 'banner' ? bannerState.length : channelState.length;
+    var count = activeTab === 'banner' ? bannerState.length : activeTab === 'channel' ? channelState.length : 1;
     var countLabel = activeTab === 'banner' ? '个 Banner' : '个快捷频道';
-    var table = activeTab === 'banner'
-      ? '<table class="data-table decoration-table banner-table"><thead><tr><th>Banner</th><th>跳转</th><th>状态</th><th>操作</th></tr></thead><tbody>' + (bannerRows || '<tr><td colspan="4" class="decoration-empty">暂无 Banner，点击右上角新增</td></tr>') + '</tbody></table>'
-      : '<table class="data-table decoration-table channel-table"><thead><tr><th>快捷频道</th><th>跳转路径</th><th>状态</th><th>操作</th></tr></thead><tbody>' + (channelRows || '<tr><td colspan="4" class="decoration-empty">暂无快捷频道，点击右上角新增</td></tr>') + '</tbody></table>';
+    var table;
+    if (activeTab === 'banner') {
+      table = '<table class="data-table decoration-table banner-table"><thead><tr><th>Banner</th><th>跳转</th><th>状态</th><th>操作</th></tr></thead><tbody>' + (bannerRows || '<tr><td colspan="4" class="decoration-empty">暂无 Banner，点击右上角新增</td></tr>') + '</tbody></table>';
+    } else if (activeTab === 'channel') {
+      table = '<table class="data-table decoration-table channel-table"><thead><tr><th>快捷频道</th><th>跳转路径</th><th>状态</th><th>操作</th></tr></thead><tbody>' + (channelRows || '<tr><td colspan="4" class="decoration-empty">暂无快捷频道，点击右上角新增</td></tr>') + '</tbody></table>';
+    } else {
+      table = homeDecorationWorkspace();
+    }
+    var toolbarAction = activeTab === 'home' ? '' : '<button class="button primary" type="button" data-decoration-action="create" data-decoration-type="' + activeTab + '" data-row-index="0">' + createLabel + '</button>';
+    var footer = activeTab === 'home' ? '' : '<footer class="decoration-foot"><span>共 <strong>' + count + '</strong> ' + countLabel + '</span><span>排序用 ↑↓ 调整，数字越小越靠前</span></footer>';
     return '<div class="decoration-page">' +
       '<section class="decoration-shell">' +
       '<header class="decoration-toolbar">' +
       '<nav class="decoration-tabs" aria-label="页面装修分类">' +
       '<button type="button" class="' + (activeTab === 'banner' ? 'active' : '') + '" data-decoration-tab="banner">Banner 管理</button>' +
       '<button type="button" class="' + (activeTab === 'channel' ? 'active' : '') + '" data-decoration-tab="channel">快捷商品频道</button>' +
+      '<button type="button" class="' + (activeTab === 'home' ? 'active' : '') + '" data-decoration-tab="home">首页装修</button>' +
       '</nav>' +
-      '<button class="button primary" type="button" data-decoration-action="create" data-decoration-type="' + activeTab + '">' + createLabel + '</button>' +
+      toolbarAction +
       '</header>' +
       '<div class="decoration-body">' + table + '</div>' +
-      '<footer class="decoration-foot"><span>共 <strong>' + count + '</strong> ' + countLabel + '</span><span>排序用 ↑↓ 调整，数字越小越靠前</span></footer>' +
+      footer +
       '</section></div>';
+  }
+
+  function updateHomeDecorationPreview(root) {
+    if (!root) return;
+    var floatingEnabled = root.querySelector('[data-home-floating-enabled]').checked;
+    var floatingPreview = root.querySelector('[data-home-preview-floating]');
+    floatingPreview.hidden = !floatingEnabled;
+    var floatingInput = root.querySelector('[data-home-floating-icon]');
+    var floatingFile = floatingInput.files[0] ? floatingInput.files[0].name : floatingInput.dataset.currentFile;
+    root.querySelector('[data-home-floating-file-name]').textContent = floatingFile || '上传图标';
+    floatingPreview.querySelector('i').textContent = floatingFile ? '已配置' : '图标';
+    floatingPreview.title = root.querySelector('[data-home-floating-path]').value.trim() || '未配置跳转地址';
+    var liveEnabled = root.querySelector('[data-home-live-enabled]').checked && root.dataset.homeLiveAvailable === 'true';
+    var productEnabled = root.querySelector('[data-home-mixed-enabled]').checked;
+    var mixedPreview = root.querySelector('[data-home-preview-mixed]');
+    root.querySelector('[data-home-preview-live]').hidden = !liveEnabled;
+    root.querySelector('[data-home-preview-products]').hidden = !productEnabled;
+    mixedPreview.hidden = !liveEnabled && !productEnabled;
+    mixedPreview.classList.toggle('live-hidden', !liveEnabled && productEnabled);
+    mixedPreview.classList.toggle('products-hidden', liveEnabled && !productEnabled);
+    var videoEnabled = root.querySelector('[data-home-video-enabled]').checked;
+    root.querySelector('[data-home-preview-videos]').hidden = !videoEnabled;
+    Array.from(root.querySelectorAll('[data-home-card-title]')).forEach(function (input) {
+      var cardIndex = input.dataset.homeCardTitle;
+      var titleNode = root.querySelector('[data-home-preview-card-title="' + cardIndex + '"]');
+      titleNode.textContent = input.value.trim() || '商品卡 ' + (Number(cardIndex) + 1);
+    });
+    Array.from(root.querySelectorAll('[data-home-sticker]')).forEach(function (input) {
+      var slot = input.dataset.homeSticker;
+      var fileName = input.files[0] ? input.files[0].name : input.dataset.currentFile;
+      root.querySelector('[data-home-file-name="' + slot + '"]').textContent = fileName || '上传贴图';
+      root.querySelector('[data-home-preview-sticker="' + slot + '"]').textContent = fileName || '未上传贴图';
+    });
+    var cardTwoTitle = root.querySelector('[data-home-card-title="1"]').value.trim();
+    var cardTwoProducts = Array.from(root.querySelectorAll('[data-home-product^="1-"]')).some(function (select) { return !!select.value; });
+    var cardTwoStickers = Array.from(root.querySelectorAll('[data-home-sticker^="1-"]')).some(function (input) {
+      return !!(input.files[0] || input.dataset.currentFile);
+    });
+    var showCardTwo = !!(cardTwoTitle || cardTwoProducts || cardTwoStickers);
+    root.querySelector('[data-home-preview-card="1"]').hidden = !showCardTwo;
+    root.querySelector('[data-home-preview-products]').classList.toggle('single-card', !showCardTwo);
+    root.querySelector('[data-home-decoration-hint]').textContent = '修改尚未保存';
+  }
+
+  function bindHomeDecorationPreviewScroll() {
+    var pane = elements.pageContent.querySelector('.home-decoration-preview-pane');
+    var floatingPreview = elements.pageContent.querySelector('[data-home-preview-floating]');
+    if (!pane || !floatingPreview) return;
+    var restoreTimer;
+    pane.addEventListener('scroll', function () {
+      if (floatingPreview.hidden) return;
+      floatingPreview.classList.add('is-scrolling');
+      window.clearTimeout(restoreTimer);
+      restoreTimer = window.setTimeout(function () {
+        floatingPreview.classList.remove('is-scrolling');
+      }, 300);
+    }, { passive: true });
+  }
+
+  function saveHomeDecoration(root) {
+    var floatingIconInput = root.querySelector('[data-home-floating-icon]');
+    var floatingIcon = floatingIconInput.files[0] ? floatingIconInput.files[0].name : floatingIconInput.dataset.currentFile;
+    var floatingPathInput = root.querySelector('[data-home-floating-path]');
+    var floatingPath = floatingPathInput.value.trim();
+    var floatingEnabled = root.querySelector('[data-home-floating-enabled]').checked;
+    if (floatingEnabled && !floatingIcon) {
+      showToast('请上传悬浮窗图标');
+      return;
+    }
+    if (floatingEnabled && (!floatingPath || floatingPath.charAt(0) !== '/')) {
+      floatingPathInput.focus();
+      showToast('请填写以 / 开头的悬浮窗跳转地址');
+      return;
+    }
+    function readCard(cardIndex) {
+      var titleInput = root.querySelector('[data-home-card-title="' + cardIndex + '"]');
+      var products = [0, 1].map(function (productIndex) {
+        return root.querySelector('[data-home-product="' + cardIndex + '-' + productIndex + '"]').value;
+      });
+      var stickers = [0, 1].map(function (productIndex) {
+        var input = root.querySelector('[data-home-sticker="' + cardIndex + '-' + productIndex + '"]');
+        return input.files[0] ? input.files[0].name : input.dataset.currentFile;
+      });
+      return { titleInput: titleInput, title: titleInput.value.trim(), products: products, stickers: stickers };
+    }
+    var cardOne = readCard(0);
+    var cardTwo = readCard(1);
+    var productEnabled = root.querySelector('[data-home-mixed-enabled]').checked;
+    if (productEnabled && (!cardOne.title || !cardOne.products[0] || !cardOne.products[1] || !cardOne.stickers[0] || !cardOne.stickers[1])) {
+      cardOne.titleInput.focus();
+      showToast('商品卡 1 需填写标题、选择 2 个商品并上传 2 张贴图');
+      return;
+    }
+    var cardTwoHasAny = cardTwo.title || cardTwo.products[0] || cardTwo.products[1] || cardTwo.stickers[0] || cardTwo.stickers[1];
+    if (productEnabled && cardTwoHasAny && (!cardTwo.title || !cardTwo.products[0] || !cardTwo.products[1] || !cardTwo.stickers[0] || !cardTwo.stickers[1])) {
+      cardTwo.titleInput.focus();
+      showToast('商品卡 2 配置后需补全标题、2 个商品和 2 张贴图');
+      return;
+    }
+    var allProducts = cardOne.products.concat(cardTwoHasAny ? cardTwo.products : []);
+    if (productEnabled && allProducts.some(function (product, productIndex) { return allProducts.indexOf(product) !== productIndex; })) {
+      showToast('同一商品不能重复添加');
+      return;
+    }
+    floatingWindowState = {
+      icon: floatingIcon,
+      path: floatingPath,
+      enabled: floatingEnabled
+    };
+    homeMixedState = {
+      enabled: productEnabled,
+      cards: [{ title: cardOne.title, products: cardOne.products, stickers: cardOne.stickers }]
+    };
+    homeLiveSectionState.enabled = root.querySelector('[data-home-live-enabled]').checked;
+    homeVideoSectionState.enabled = root.querySelector('[data-home-video-enabled]').checked;
+    if (cardTwoHasAny) homeMixedState.cards.push({ title: cardTwo.title, products: cardTwo.products, stickers: cardTwo.stickers });
+    refreshCurrentView();
+    showToast('首页装修已保存');
   }
 
   function openDecorationEditor(type, mode, index) {
     var isBanner = type === 'banner';
-    var list = isBanner ? bannerState : channelState;
+    var isMixed = type === 'mixed';
+    var isFloating = type === 'floating';
+    var list = isBanner ? bannerState : isMixed ? [homeMixedState] : isFloating ? [floatingWindowState] : channelState;
     var editing = mode === 'edit';
     var item = editing ? list[index] : (isBanner ? { title: '', media: '', targetType: '小程序页面', target: '', start: '', end: '', enabled: true } : { name: '', icon: '', path: '', enabled: true });
-    openDrawer((editing ? '编辑' : '新增') + (isBanner ? ' Banner' : '快捷频道'), isBanner ? '页面装修 / Banner 管理' : '页面装修 / 快捷商品频道', [], '', editing ? '保存修改' : '确认新增');
-    elements.drawer.querySelector('.operation-modal-card').classList.add('decoration-modal-card', isBanner ? 'banner-editor-modal' : 'channel-editor-modal');
+    var objectLabel = isBanner ? ' Banner' : isMixed ? '首页直播与商品组件' : isFloating ? '首页悬浮窗' : '快捷频道';
+    var editorEyebrow = isBanner ? '页面装修 / Banner 管理' : isMixed ? '页面装修 / 首页直播与商品组件' : isFloating ? '页面装修 / 首页悬浮窗' : '页面装修 / 快捷商品频道';
+    function editorOption(value, current, label) {
+      return '<option value="' + escapeHTML(value) + '" ' + (value === current ? 'selected' : '') + '>' + escapeHTML(label || value) + '</option>';
+    }
+    openDrawer((editing ? '编辑' : '新增') + objectLabel, editorEyebrow, [], '', editing ? '保存修改' : '确认新增');
+    elements.drawer.querySelector('.operation-modal-card').classList.add('decoration-modal-card', isBanner ? 'banner-editor-modal' : isMixed ? 'mixed-editor-modal' : isFloating ? 'floating-editor-modal' : 'channel-editor-modal');
     elements.drawer.querySelector('.operation-modal-card > footer [data-close-drawer]').textContent = '取消';
     if (isBanner) {
       elements.drawerBody.innerHTML = '<div class="decoration-editor decoration-standard-form banner-editor">' +
@@ -725,6 +959,59 @@
         '<div class="decoration-form-row"><label class="decoration-row-label">跳转目标</label><div class="decoration-row-control"><input data-decoration-target value="' + escapeHTML(item.target === '—' ? '' : item.target) + '" placeholder="请输入小程序页面路径（选填）"><small>不填写则点击 Banner 不跳转</small></div></div>' +
         '<div class="decoration-form-row"><label class="decoration-row-label">启用状态</label><div class="decoration-row-control decoration-status-control"><label><input type="checkbox" data-decoration-enabled ' + (item.enabled ? 'checked' : '') + '> 启用</label><small>启用后在小程序首页展示</small></div></div>' +
         '</div>';
+    } else if (isMixed) {
+      var mixedCardOne = item.cards[0] || { title: '', products: ['', ''], stickers: ['', ''] };
+      var mixedCardTwo = item.cards[1] || { title: '', products: ['', ''], stickers: ['', ''] };
+      mixedCardOne.stickers = mixedCardOne.stickers || ['', ''];
+      mixedCardTwo.stickers = mixedCardTwo.stickers || ['', ''];
+      var mixedProductCatalog = ['臻润修护精华套装', '焕亮水乳护肤礼盒', '净透清洁护理套装', '紧致焕颜面霜组合', '舒缓修护精华液', '盈润保湿面膜套装'];
+      var selectedLives = item.lives || [];
+      var liveOptions = ['黛莱皙官方直播间', '黛莱皙福利专场', '夏日修护课堂'].map(function (live) {
+        return '<label class="mixed-live-option"><input type="checkbox" data-decoration-live value="' + escapeHTML(live) + '" ' + (selectedLives.indexOf(live) > -1 ? 'checked' : '') + '><span>' + escapeHTML(live) + '</span></label>';
+      }).join('');
+      function mixedProductOptions(current) {
+        return '<option value="">请选择有效商品</option>' + mixedProductCatalog.map(function (product) {
+          return editorOption(product, current);
+        }).join('');
+      }
+      function mixedStickerUpload(slot, current) {
+        return '<label class="mixed-sticker-upload"><input type="file" accept="image/*" data-decoration-card-sticker="' + slot + '" data-current-sticker="' + escapeHTML(current || '') + '"><i>贴图</i><span><strong data-sticker-name="' + slot + '">' + escapeHTML(current || '未上传贴图') + '</strong><small>点击上传 JPG/PNG</small></span></label>';
+      }
+      elements.drawerBody.innerHTML = '<div class="mixed-decoration-editor">' +
+        '<section class="mixed-admin-preview" aria-label="首页混排预览">' +
+        '<div class="mixed-preview-live"><strong data-mixed-preview-live-count>' + selectedLives.length + ' 场直播自动轮播</strong><small data-mixed-preview-live-names>' + escapeHTML(selectedLives.join(' / ')) + '</small><span class="mixed-preview-live-foot">主播头像　主播昵称　赚 xx</span></div>' +
+        '<div class="mixed-preview-cards">' +
+        '<div class="mixed-preview-card"><strong data-mixed-preview-card-title="0">' + escapeHTML(mixedCardOne.title || '商品卡 1') + '</strong><div class="mixed-preview-stickers"><span class="mixed-preview-sticker" data-mixed-preview-sticker="0-0">' + escapeHTML(mixedCardOne.stickers[0] || '商品贴图 A') + '</span><span class="mixed-preview-sticker" data-mixed-preview-sticker="0-1">' + escapeHTML(mixedCardOne.stickers[1] || '商品贴图 B') + '</span></div></div>' +
+        '<div class="mixed-preview-card"><strong data-mixed-preview-card-title="1">' + escapeHTML(mixedCardTwo.title || '商品卡 2（未配置）') + '</strong><div class="mixed-preview-stickers"><span class="mixed-preview-sticker" data-mixed-preview-sticker="1-0">' + escapeHTML(mixedCardTwo.stickers[0] || '商品贴图 A') + '</span><span class="mixed-preview-sticker" data-mixed-preview-sticker="1-1">' + escapeHTML(mixedCardTwo.stickers[1] || '商品贴图 B') + '</span></div></div>' +
+        '</div></section>' +
+        '<section class="decoration-config-section"><header class="decoration-config-head"><span><strong>首页直播</strong><small>点击直播间即可添加或移除，所选直播在首页自动轮播</small></span><i class="decoration-step">1</i></header>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">直播间 <b>*</b></label><div class="decoration-row-control"><div class="mixed-live-picker" data-decoration-lives>' + liveOptions + '</div><small>至少添加 1 场；再次点击已勾选直播即可移除</small></div></div></section>' +
+        '<div class="mixed-config-grid">' +
+        '<section class="mixed-config-card"><header><strong>商品卡 1</strong><small>必填 · 2 张贴图</small></header>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">卡片标题 <b>*</b></label><div class="decoration-row-control"><input data-decoration-card-title="0" value="' + escapeHTML(mixedCardOne.title) + '" placeholder="如 修护精选"></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">商品 A <b>*</b></label><div class="decoration-row-control"><select data-decoration-card-product="0-0">' + mixedProductOptions(mixedCardOne.products[0]) + '</select></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">贴图 A <b>*</b></label><div class="decoration-row-control">' + mixedStickerUpload('0-0', mixedCardOne.stickers[0]) + '</div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">商品 B <b>*</b></label><div class="decoration-row-control"><select data-decoration-card-product="0-1">' + mixedProductOptions(mixedCardOne.products[1]) + '</select></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">贴图 B <b>*</b></label><div class="decoration-row-control">' + mixedStickerUpload('0-1', mixedCardOne.stickers[1]) + '<small>整张贴图跳转所选商品，贴图内已包含“赚 xx”</small></div></div></section>' +
+        '<section class="mixed-config-card"><header><strong>商品卡 2</strong><small>选填 · 需完整配置</small></header>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">卡片标题</label><div class="decoration-row-control"><input data-decoration-card-title="1" value="' + escapeHTML(mixedCardTwo.title) + '" placeholder="如 补水套装"></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">商品 A</label><div class="decoration-row-control"><select data-decoration-card-product="1-0">' + mixedProductOptions(mixedCardTwo.products[0]) + '</select></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">贴图 A</label><div class="decoration-row-control">' + mixedStickerUpload('1-0', mixedCardTwo.stickers[0]) + '</div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">商品 B</label><div class="decoration-row-control"><select data-decoration-card-product="1-1">' + mixedProductOptions(mixedCardTwo.products[1]) + '</select></div></div>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">贴图 B</label><div class="decoration-row-control">' + mixedStickerUpload('1-1', mixedCardTwo.stickers[1]) + '<small>填写任一字段后，标题、两个商品和两张贴图均变为必填</small></div></div></section>' +
+        '</div>' +
+        '<section class="decoration-config-section"><header class="decoration-config-head"><span><strong>发布状态</strong><small>启用后展示在首页快捷频道下方</small></span><i class="decoration-step">2</i></header><div class="decoration-form-row"><label class="decoration-row-label">启用状态</label><div class="decoration-row-control decoration-status-control"><label><input type="checkbox" data-decoration-enabled ' + (item.enabled ? 'checked' : '') + '> 启用</label><small data-mixed-preview-status>' + (item.enabled ? '当前保存后将在首页展示' : '当前保存后仍保持隐藏') + '</small></div></div></section>' +
+        '</div>';
+    } else if (isFloating) {
+      elements.drawerBody.innerHTML = '<div class="floating-decoration-editor">' +
+        '<section class="floating-admin-preview"><div class="floating-preview-copy"><strong>首页悬浮窗效果预览</strong><small data-floating-preview-file>' + escapeHTML(item.icon || '未选择图标') + '</small><small data-floating-preview-path>' + escapeHTML(item.path || '未配置跳转地址') + '</small><small data-floating-preview-status>' + (item.enabled ? '状态：启用' : '状态：停用') + '</small></div><div class="floating-preview-canvas"><span class="floating-preview-entry"><i data-floating-preview-icon>图标</i><span>悬浮入口</span></span></div></section>' +
+        '<section class="decoration-config-section"><header class="decoration-config-head"><span><strong>图标配置</strong><small>建议使用透明底 PNG，避免遮挡首页内容</small></span><i class="decoration-step">1</i></header>' +
+        decorationUploadField('悬浮窗图标', 'data-decoration-icon', item.icon, 'channel') + '</section>' +
+        '<section class="decoration-config-section"><header class="decoration-config-head"><span><strong>跳转配置</strong><small>点击悬浮窗后进入指定的小程序页面</small></span><i class="decoration-step">2</i></header>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">跳转地址 <b>*</b></label><div class="decoration-row-control"><input data-decoration-path value="' + escapeHTML(item.path || '') + '" placeholder="如 /pages/tutorial/index"><small>必须以 / 开头，保存前校验页面路径格式</small></div></div></section>' +
+        '<section class="decoration-config-section"><header class="decoration-config-head"><span><strong>发布状态</strong><small>只有图标和跳转地址均有效时才会在首页展示</small></span><i class="decoration-step">3</i></header>' +
+        '<div class="decoration-form-row"><label class="decoration-row-label">启用状态</label><div class="decoration-row-control decoration-status-control"><label><input type="checkbox" data-decoration-enabled ' + (item.enabled ? 'checked' : '') + '> 启用</label><small>停用后首页不保留空白占位</small></div></div></section>' +
+        '</div>';
     } else {
       elements.drawerBody.innerHTML = '<div class="decoration-editor decoration-standard-form channel-editor">' +
         decorationUploadField('频道图标', 'data-decoration-icon', item.icon, 'channel') +
@@ -732,6 +1019,52 @@
         '<div class="decoration-form-row"><label class="decoration-row-label">跳转路径 <b>*</b></label><div class="decoration-row-control"><input data-decoration-path value="' + escapeHTML(item.path || '') + '" placeholder="请输入小程序页面路径，如 /pages/goods/list"><small>点击频道后跳转到该路径</small></div></div>' +
         '<div class="decoration-form-row"><label class="decoration-row-label">启用状态</label><div class="decoration-row-control decoration-status-control"><label><input type="checkbox" data-decoration-enabled ' + (item.enabled ? 'checked' : '') + '> 启用</label><small>启用后展示在小程序首页快捷频道区域</small></div></div>' +
         '</div>';
+    }
+    if (isMixed) {
+      var previewLiveInputs = Array.from(elements.drawerBody.querySelectorAll('[data-decoration-live]'));
+      var previewCardTitleInputs = Array.from(elements.drawerBody.querySelectorAll('[data-decoration-card-title]'));
+      var previewProductSelects = Array.from(elements.drawerBody.querySelectorAll('[data-decoration-card-product]'));
+      var previewStickerInputs = Array.from(elements.drawerBody.querySelectorAll('[data-decoration-card-sticker]'));
+      var previewMixedEnabled = elements.drawerBody.querySelector('[data-decoration-enabled]');
+      function refreshMixedPreview() {
+        var previewLives = previewLiveInputs.filter(function (input) { return input.checked; }).map(function (input) { return input.value; });
+        elements.drawerBody.querySelector('[data-mixed-preview-live-count]').textContent = previewLives.length ? previewLives.length + ' 场直播自动轮播' : '尚未选择直播';
+        elements.drawerBody.querySelector('[data-mixed-preview-live-names]').textContent = previewLives.join(' / ') || '至少选择 1 场有效直播';
+        previewCardTitleInputs.forEach(function (input) {
+          var cardIndex = input.dataset.decorationCardTitle;
+          elements.drawerBody.querySelector('[data-mixed-preview-card-title="' + cardIndex + '"]').textContent = input.value.trim() || (cardIndex === '0' ? '商品卡 1' : '商品卡 2（未配置）');
+        });
+        previewStickerInputs.forEach(function (input) {
+          var slot = input.dataset.decorationCardSticker;
+          var fallback = slot.slice(-1) === '0' ? '商品贴图 A' : '商品贴图 B';
+          var stickerName = input.files[0] ? input.files[0].name : input.dataset.currentSticker;
+          elements.drawerBody.querySelector('[data-mixed-preview-sticker="' + slot + '"]').textContent = stickerName || fallback;
+          elements.drawerBody.querySelector('[data-sticker-name="' + slot + '"]').textContent = stickerName || '未上传贴图';
+        });
+        elements.drawerBody.querySelector('[data-mixed-preview-status]').textContent = previewMixedEnabled.checked ? '当前保存后将在首页展示' : '当前保存后仍保持隐藏';
+      }
+      previewLiveInputs.forEach(function (input) { input.addEventListener('change', refreshMixedPreview); });
+      previewCardTitleInputs.forEach(function (input) { input.addEventListener('input', refreshMixedPreview); });
+      previewProductSelects.forEach(function (select) { select.addEventListener('change', refreshMixedPreview); });
+      previewStickerInputs.forEach(function (input) { input.addEventListener('change', refreshMixedPreview); });
+      previewMixedEnabled.addEventListener('change', refreshMixedPreview);
+      refreshMixedPreview();
+    } else if (isFloating) {
+      var previewFloatingIconInput = elements.drawerBody.querySelector('[data-decoration-icon]');
+      var previewFloatingPathInput = elements.drawerBody.querySelector('[data-decoration-path]');
+      var previewFloatingEnabled = elements.drawerBody.querySelector('[data-decoration-enabled]');
+      function refreshFloatingPreview() {
+        var previewFile = previewFloatingIconInput.files[0] ? previewFloatingIconInput.files[0].name : item.icon;
+        var previewPath = previewFloatingPathInput.value.trim();
+        elements.drawerBody.querySelector('[data-floating-preview-file]').textContent = previewFile || '未选择图标';
+        elements.drawerBody.querySelector('[data-floating-preview-path]').textContent = previewPath || '未配置跳转地址';
+        elements.drawerBody.querySelector('[data-floating-preview-status]').textContent = previewFloatingEnabled.checked ? '状态：启用' : '状态：停用';
+        elements.drawerBody.querySelector('[data-floating-preview-icon]').textContent = previewFile ? '已配置' : '图标';
+      }
+      previewFloatingIconInput.addEventListener('change', refreshFloatingPreview);
+      previewFloatingPathInput.addEventListener('input', refreshFloatingPreview);
+      previewFloatingEnabled.addEventListener('change', refreshFloatingPreview);
+      refreshFloatingPreview();
     }
     state.drawerAction = function () {
       var mediaInput;
@@ -753,6 +1086,97 @@
         var savedBanner = { title: title, media: media, targetType: target ? (item.targetType === '不跳转' ? '小程序页面' : item.targetType || '小程序页面') : '不跳转', target: target || '—', start: '', end: '', enabled: elements.drawerBody.querySelector('[data-decoration-enabled]').checked };
         if (editing) bannerState[index] = savedBanner;
         else bannerState.push(savedBanner);
+      } else if (isMixed) {
+        var liveInputs = Array.from(elements.drawerBody.querySelectorAll('[data-decoration-live]'));
+        var cardOneTitleInput = elements.drawerBody.querySelector('[data-decoration-card-title="0"]');
+        var cardTwoTitleInput = elements.drawerBody.querySelector('[data-decoration-card-title="1"]');
+        var cardOneProductInputs = [
+          elements.drawerBody.querySelector('[data-decoration-card-product="0-0"]'),
+          elements.drawerBody.querySelector('[data-decoration-card-product="0-1"]')
+        ];
+        var cardTwoProductInputs = [
+          elements.drawerBody.querySelector('[data-decoration-card-product="1-0"]'),
+          elements.drawerBody.querySelector('[data-decoration-card-product="1-1"]')
+        ];
+        var cardOneStickerInputs = [
+          elements.drawerBody.querySelector('[data-decoration-card-sticker="0-0"]'),
+          elements.drawerBody.querySelector('[data-decoration-card-sticker="0-1"]')
+        ];
+        var cardTwoStickerInputs = [
+          elements.drawerBody.querySelector('[data-decoration-card-sticker="1-0"]'),
+          elements.drawerBody.querySelector('[data-decoration-card-sticker="1-1"]')
+        ];
+        var lives = liveInputs.filter(function (input) { return input.checked; }).map(function (input) { return input.value; });
+        var cardOneTitle = cardOneTitleInput.value.trim();
+        var cardTwoTitle = cardTwoTitleInput.value.trim();
+        var cardOneProducts = cardOneProductInputs.map(function (input) { return input.value; });
+        var cardTwoProducts = cardTwoProductInputs.map(function (input) { return input.value; });
+        var cardOneStickers = cardOneStickerInputs.map(function (input) { return input.files[0] ? input.files[0].name : input.dataset.currentSticker; });
+        var cardTwoStickers = cardTwoStickerInputs.map(function (input) { return input.files[0] ? input.files[0].name : input.dataset.currentSticker; });
+        if (!lives.length) {
+          liveInputs[0].focus();
+          showToast('请至少选择 1 场推荐热门直播');
+          return false;
+        }
+        if (!cardOneTitle) {
+          cardOneTitleInput.focus();
+          showToast('请填写商品卡 1 标题');
+          return false;
+        }
+        if (!cardOneProducts[0] || !cardOneProducts[1]) {
+          cardOneProductInputs[cardOneProducts[0] ? 1 : 0].focus();
+          showToast('商品卡 1 需要选择 2 个商品');
+          return false;
+        }
+        if (!cardOneStickers[0] || !cardOneStickers[1]) {
+          showToast('商品卡 1 需要上传 2 张商品贴图');
+          return false;
+        }
+        var cardTwoHasAny = cardTwoTitle || cardTwoProducts[0] || cardTwoProducts[1] || cardTwoStickers[0] || cardTwoStickers[1];
+        if (cardTwoHasAny && (!cardTwoTitle || !cardTwoProducts[0] || !cardTwoProducts[1] || !cardTwoStickers[0] || !cardTwoStickers[1])) {
+          if (!cardTwoTitle) cardTwoTitleInput.focus();
+          else if (!cardTwoProducts[0] || !cardTwoProducts[1]) cardTwoProductInputs[cardTwoProducts[0] ? 1 : 0].focus();
+          showToast('商品卡 2 需同时填写标题、选择 2 个商品并上传 2 张贴图');
+          return false;
+        }
+        var selectedProducts = cardOneProducts.concat(cardTwoHasAny ? cardTwoProducts : []);
+        var hasDuplicateProduct = selectedProducts.some(function (product, productIndex) {
+          return selectedProducts.indexOf(product) !== productIndex;
+        });
+        if (hasDuplicateProduct) {
+          showToast('同一商品不能重复放入混排区域');
+          return false;
+        }
+        homeMixedState = {
+          lives: lives,
+          enabled: elements.drawerBody.querySelector('[data-decoration-enabled]').checked,
+          cards: [{ title: cardOneTitle, products: cardOneProducts, stickers: cardOneStickers }]
+        };
+        if (cardTwoHasAny) homeMixedState.cards.push({ title: cardTwoTitle, products: cardTwoProducts, stickers: cardTwoStickers });
+      } else if (isFloating) {
+        mediaInput = elements.drawerBody.querySelector('[data-decoration-icon]');
+        var floatingPathInput = elements.drawerBody.querySelector('[data-decoration-path]');
+        var floatingIcon = mediaInput.files[0] ? mediaInput.files[0].name : item.icon;
+        var floatingPath = floatingPathInput.value.trim();
+        if (!floatingIcon) {
+          showToast('请上传悬浮窗图标');
+          return false;
+        }
+        if (!floatingPath) {
+          floatingPathInput.focus();
+          showToast('请填写跳转地址');
+          return false;
+        }
+        if (floatingPath.charAt(0) !== '/') {
+          floatingPathInput.focus();
+          showToast('跳转地址必须以 / 开头');
+          return false;
+        }
+        floatingWindowState = {
+          icon: floatingIcon,
+          path: floatingPath,
+          enabled: elements.drawerBody.querySelector('[data-decoration-enabled]').checked
+        };
       } else {
         var nameInput = elements.drawerBody.querySelector('[data-decoration-name]');
         mediaInput = elements.drawerBody.querySelector('[data-decoration-icon]');
@@ -779,7 +1203,7 @@
         else channelState.push(savedChannel);
       }
       refreshCurrentView();
-      showToast((isBanner ? 'Banner' : '快捷频道') + (editing ? '已更新' : '已新增'));
+      showToast((isBanner ? 'Banner' : isMixed ? '首页直播与商品组件' : isFloating ? '首页悬浮窗' : '快捷频道') + (editing ? '已更新' : '已新增'));
       return true;
     };
   }
@@ -787,7 +1211,7 @@
   function handleDecorationAction(button) {
     var type = button.dataset.decorationType;
     var action = button.dataset.decorationAction;
-    var list = type === 'banner' ? bannerState : channelState;
+    var list = type === 'banner' ? bannerState : type === 'mixed' ? [homeMixedState] : type === 'floating' ? [floatingWindowState] : channelState;
     var index = Number(button.dataset.rowIndex);
     if (action === 'create') {
       openDecorationEditor(type, 'create');
@@ -1007,6 +1431,7 @@
     renderPrimaryNav();
     elements.breadcrumbTitle.textContent = module.label;
     elements.pageContent.innerHTML = renderView();
+    bindHomeDecorationPreviewScroll();
   }
 
   function showToast(message) {
@@ -1240,11 +1665,13 @@
     var storeSelect = panelNode.querySelector('[data-filter-store]');
     var primaryCategorySelect = panelNode.querySelector('[data-filter-primary-category]');
     var secondaryCategorySelect = panelNode.querySelector('[data-filter-secondary-category]');
+    var videoCategorySelect = panelNode.querySelector('[data-filter-video-category]');
     var keyword = keywordInput ? keywordInput.value.trim().toLowerCase() : '';
     var selected = statusSelect ? statusSelect.value : '';
     var selectedStore = storeSelect ? storeSelect.value.trim().toLowerCase() : '';
     var selectedPrimaryCategory = primaryCategorySelect ? primaryCategorySelect.value.trim().toLowerCase() : '';
     var selectedSecondaryCategory = secondaryCategorySelect ? secondaryCategorySelect.value.trim().toLowerCase() : '';
+    var selectedVideoCategory = videoCategorySelect ? videoCategorySelect.value.trim().toLowerCase() : '';
     var rows = panelNode.querySelectorAll('[data-search-row]');
     var visible = 0;
     rows.forEach(function (row) {
@@ -1254,7 +1681,8 @@
       var storeMatch = !selectedStore || text.indexOf(selectedStore) >= 0;
       var primaryCategoryMatch = !selectedPrimaryCategory || text.indexOf(selectedPrimaryCategory) >= 0;
       var secondaryCategoryMatch = !selectedSecondaryCategory || text.indexOf(selectedSecondaryCategory) >= 0;
-      row.hidden = !(keywordMatch && statusMatch && storeMatch && primaryCategoryMatch && secondaryCategoryMatch);
+      var videoCategoryMatch = !selectedVideoCategory || text.indexOf(selectedVideoCategory) >= 0;
+      row.hidden = !(keywordMatch && statusMatch && storeMatch && primaryCategoryMatch && secondaryCategoryMatch && videoCategoryMatch);
       if (!row.hidden) visible += 1;
     });
     showToast('筛选完成，共 ' + visible + ' 条');
@@ -1262,6 +1690,7 @@
 
   function refreshCurrentView() {
     elements.pageContent.innerHTML = renderView();
+    bindHomeDecorationPreviewScroll();
   }
 
   function syncProductRow(index) {
@@ -1379,14 +1808,15 @@
     if (!live || !row) return;
     row[2] = status(live.listed ? '已上架' : '已下架', live.listed ? 'filled' : 'dashed');
     row[5] = live.scriptCount ? live.scriptCount + ' 条' : '未配置';
+    row[6] = live.recommended ? '已推荐 · #' + (live.sort == null ? '未排序' : live.sort) : (live.sort == null ? '—' : '未推荐 · #' + live.sort);
   }
 
   function syncVideoRow(index) {
     var video = videoState[index];
     var row = tableConfigs['content:video'].rows[index];
     if (!video || !row) return;
-    row[3] = status(video.listed ? '已上架' : '已下架', video.listed ? 'filled' : 'dashed');
-    row[4] = video.sort == null ? '—' : String(video.sort);
+    row[4] = status(video.listed ? '已上架' : '已下架', video.listed ? 'filled' : 'dashed');
+    row[5] = video.recommended ? '已推荐 · #' + (video.sort == null ? '未排序' : video.sort) : (video.sort == null ? '—' : '未推荐 · #' + video.sort);
   }
 
   function videoNameAt(index) {
@@ -1409,7 +1839,7 @@
     elements.drawer.querySelector('.operation-modal-card > footer [data-close-drawer]').textContent = '取消';
     elements.drawerBody.innerHTML = '<div class="video-sort-form">' +
       '<div class="video-sort-summary"><span class="video-sort-cover">视</span><div><span>当前视频</span><strong>' + escapeHTML(videoName) + '</strong><small>' + (video.listed ? '已上架' : '已下架') + '</small></div></div>' +
-      '<div class="video-sort-field"><label for="video-sort-value">排序值 <b>*</b></label><input id="video-sort-value" type="number" min="1" max="999" step="1" data-video-sort-value value="' + currentSort + '"><small>数值越小，在推客端视频 Feed 中越靠前。</small></div>' +
+      '<div class="video-sort-field"><label for="video-sort-value">排序值 <b>*</b></label><input id="video-sort-value" type="number" min="1" max="999" step="1" data-video-sort-value value="' + currentSort + '"><small>数值越小，在视频 Feed 和首页热门短视频中越靠前。</small></div>' +
       '</div>';
     var sortInput = elements.drawerBody.querySelector('[data-video-sort-value]');
     window.setTimeout(function () { if (sortInput) { sortInput.focus(); sortInput.select(); } }, 0);
@@ -2218,11 +2648,33 @@
       var liveIndex = Number(liveButton.dataset.rowIndex);
       var liveItem = liveState[liveIndex];
       var liveName = liveNameAt(liveIndex);
-      if (liveButton.dataset.liveAction === 'script') {
+      var liveAction = liveButton.dataset.liveAction;
+      if (liveAction === 'script') {
         openLiveScriptEditor(liveIndex, false);
+      } else if (liveAction === 'recommend') {
+        if (!liveItem.listed) {
+          showToast('请先上架直播，再推荐上热门');
+        } else if (liveItem.recommended) {
+          openConfirm('取消首页热门', '取消后该直播将从首页热门直播轮播中移除，直播本身仍保持上架。', function () {
+            liveItem.recommended = false;
+            syncLiveRow(liveIndex);
+            refreshCurrentView();
+            showToast(liveName + '已取消首页热门');
+          });
+        } else {
+          openConfirm('推荐上首页热门', '推荐后该直播将按人工排序进入首页热门直播轮播。', function () {
+            var liveSorts = liveState.filter(function (item) { return item.recommended && item.sort != null; }).map(function (item) { return item.sort; });
+            liveItem.recommended = true;
+            if (liveItem.sort == null) liveItem.sort = liveSorts.length ? Math.max.apply(null, liveSorts) + 1 : 1;
+            syncLiveRow(liveIndex);
+            refreshCurrentView();
+            showToast(liveName + '已推荐上首页热门');
+          });
+        }
       } else if (liveItem.listed) {
-        openConfirm('确认下架直播', '下架后推客端不再展示该直播，已保存的分享话术仍会保留。', function () {
+        openConfirm('确认下架直播', '下架后推客端不再展示该直播，并自动取消首页热门推荐；已保存的分享话术仍会保留。', function () {
           liveItem.listed = false;
+          liveItem.recommended = false;
           syncLiveRow(liveIndex);
           refreshCurrentView();
           showToast(liveName + '已下架');
@@ -2246,13 +2698,33 @@
       var videoItem = videoState[videoIndex];
       var videoRow = tableConfigs['content:video'].rows[videoIndex];
       var videoName = stripHTML(videoRow[0]);
-      if (videoButton.dataset.videoAction === 'sort') {
+      var videoAction = videoButton.dataset.videoAction;
+      if (videoAction === 'sort') {
         openVideoSortEditor(videoIndex);
         return;
       }
+      if (videoAction === 'recommend') {
+        if (!videoItem.listed) {
+          showToast('请先上架视频，再推荐上热门');
+          return;
+        }
+        var recommendLabel = videoItem.recommended ? '取消热门推荐' : '推荐上热门';
+        openConfirm(recommendLabel, videoItem.recommended ? '取消后视频仍保持上架，仅从首页热门短视频区域移除。' : '推荐后视频将按人工排序展示在首页热门短视频区域。', function () {
+          videoItem.recommended = !videoItem.recommended;
+          if (videoItem.recommended && videoItem.sort == null) {
+            var recommendedSorts = videoState.filter(function (item) { return item.recommended && item.sort != null; }).map(function (item) { return item.sort; });
+            videoItem.sort = recommendedSorts.length ? Math.max.apply(null, recommendedSorts) + 1 : 1;
+          }
+          syncVideoRow(videoIndex);
+          refreshCurrentView();
+          showToast(videoItem.recommended ? videoName + '已推荐上热门' : videoName + '已取消热门推荐');
+        });
+        return;
+      }
       var videoActionLabel = videoItem.listed ? '下架' : '上架';
-      openConfirm('确认' + videoActionLabel + '视频', videoItem.listed ? '下架后该视频将不再向推客展示。' : '上架后该视频将展示在推客端视频 Feed 中。', function () {
+      openConfirm('确认' + videoActionLabel + '视频', videoItem.listed ? '下架后该视频将不再向推客展示，并自动取消首页热门推荐。' : '上架后该视频将展示在推客端视频 Feed 中。', function () {
         videoItem.listed = !videoItem.listed;
+        if (!videoItem.listed) videoItem.recommended = false;
         syncVideoRow(videoIndex);
         refreshCurrentView();
         showToast(videoName + '已' + videoActionLabel);
@@ -2469,6 +2941,12 @@
       return;
     }
 
+    var homeDecorationSave = event.target.closest('[data-home-decoration-save]');
+    if (homeDecorationSave) {
+      saveHomeDecoration(homeDecorationSave.closest('[data-home-decoration-root]'));
+      return;
+    }
+
     var decorationTabButton = event.target.closest('[data-decoration-tab]');
     if (decorationTabButton) {
       state.decorationTab = decorationTabButton.dataset.decorationTab;
@@ -2629,11 +3107,22 @@
   });
 
   document.addEventListener('change', function (event) {
+    var homeRoot = event.target.closest('[data-home-decoration-root]');
+    if (homeRoot && event.target.matches('[data-home-floating-enabled], [data-home-floating-icon], [data-home-live-enabled], [data-home-mixed-enabled], [data-home-video-enabled], [data-home-product], [data-home-sticker]')) {
+      updateHomeDecorationPreview(homeRoot);
+    }
     if (event.target.matches('[data-page-size]')) {
       var key = event.target.dataset.pageKey;
       state.pageSizes[key] = Number(event.target.value);
       state.pages[key] = 1;
       refreshCurrentView();
+    }
+  });
+
+  document.addEventListener('input', function (event) {
+    var homeRoot = event.target.closest('[data-home-decoration-root]');
+    if (homeRoot && event.target.matches('[data-home-floating-path], [data-home-card-title]')) {
+      updateHomeDecorationPreview(homeRoot);
     }
   });
 

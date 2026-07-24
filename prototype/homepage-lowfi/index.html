@@ -198,7 +198,7 @@
 
     .circle-header { padding-bottom: 10px; background: #e3e3e3; border-bottom: 1px solid #bdbdbd; }
     .circle-capsule-row { height: 31px; display: flex; justify-content: flex-end; align-items: center; padding: 0 14px; }
-    .circle-tabs { display: grid; grid-template-columns: 1fr 1fr; width: 220px; margin: 2px auto 9px; }
+    .circle-tabs { display: grid; grid-template-columns: repeat(3, 1fr); width: 280px; margin: 2px auto 9px; }
     .circle-tab { position: relative; height: 36px; border: 0; background: transparent; color: #666; font-size: 14px; }
     .circle-tab.active { color: var(--ink); font-weight: 700; }
     .circle-tab.active::after { content: ""; position: absolute; left: 50%; bottom: 1px; width: 28px; height: 2px; transform: translateX(-50%); background: var(--ink); }
@@ -273,13 +273,204 @@
       font-size: 12px;
       font-weight: 700;
     }
+    .home-mixed-layout {
+      width: calc(100% - 28px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr);
+      gap: 8px;
+      margin: 10px 14px 0;
+    }
+    .home-mixed-live,
+    .home-mixed-product-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      text-align: left;
+    }
+    .home-mixed-live { min-height: 320px; display: flex; flex-direction: column; padding: 9px; }
+    .home-mixed-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+    .home-mixed-head strong { min-width: 0; overflow: hidden; font-size: 13px; white-space: nowrap; text-overflow: ellipsis; }
+    .home-mixed-more { flex: none; padding: 0; border: 0; background: transparent; color: #555; font-size: 9px; }
+    .home-mixed-live-cover {
+      position: relative;
+      min-height: 236px;
+      width: 100%;
+      flex: 1;
+      display: block;
+      overflow: hidden;
+      margin-top: 8px;
+      padding: 0;
+      border: 1px dashed #999;
+      background: #e6e6e6;
+      color: #666;
+      font-size: 11px;
+      text-align: left;
+    }
+    .home-mixed-live-slide { position: absolute; inset: 0; display: grid; place-items: center; background: #e6e6e6; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+    .home-mixed-live-slide:nth-child(2) { background: #dedede; }
+    .home-mixed-live-slide:nth-child(3) { background: #d6d6d6; }
+    .home-mixed-live-slide.active { opacity: 1; }
+    .home-mixed-live-tag { position: absolute; top: 7px; left: 7px; padding: 3px 6px; border: 1px solid #777; background: #fff; color: #333; font-size: 9px; font-weight: 700; }
+    .home-mixed-live-cover small { position: absolute; top: 7px; left: 55px; padding: 3px 5px; background: rgba(255, 255, 255, .9); color: #555; font-size: 9px; line-height: 1.2; }
+    .home-mixed-live-host { position: absolute; right: 0; bottom: 0; left: 0; min-width: 0; display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 6px; padding: 18px 7px 7px; background: linear-gradient(transparent, rgba(0, 0, 0, .72)); color: #fff; }
+    .home-mixed-live-avatar { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid #fff; border-radius: 50%; background: #777; color: #fff; font-size: 8px; font-style: normal; font-weight: 700; }
+    .home-mixed-live-host strong { overflow: hidden; color: #fff; font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
+    .home-mixed-live-host em { color: #fff; font-size: 11px; font-style: normal; font-weight: 700; white-space: nowrap; }
+    .home-mixed-live-dots { position: absolute; right: 7px; bottom: 45px; z-index: 4; display: flex; gap: 3px; }
+    .home-mixed-live-dots i { width: 4px; height: 4px; border-radius: 50%; background: rgba(255, 255, 255, .55); }
+    .home-mixed-live-dots i.active { width: 10px; border-radius: 3px; background: #fff; }
+    .home-mixed-products { display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .home-mixed-product-card { min-height: 156px; padding: 7px; }
+    .home-mixed-product-card h3 { overflow: hidden; margin: 0; font-size: 13px; line-height: 1.3; white-space: nowrap; text-overflow: ellipsis; }
+    .home-mixed-product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; margin-top: 7px; }
+    .home-mixed-product-item { min-width: 0; padding: 0; border: 0; background: transparent; color: var(--ink); text-align: left; }
+    .home-mixed-product-sticker { width: 100%; aspect-ratio: 3 / 4; display: grid; place-items: center; align-content: center; gap: 4px; border: 1px dashed #999; background: #ededed; color: #555; font-size: 9px; font-weight: 700; line-height: 1.3; text-align: center; }
+    .home-mixed-product-sticker small { font-size: 8px; font-weight: 400; }
+    .home-mixed-layout.no-live { grid-template-columns: 1fr; }
+    .home-mixed-layout.no-live .home-mixed-live { display: none; }
+    .home-mixed-layout.no-live .home-mixed-products { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+    .home-mixed-layout.no-live .home-mixed-products.single-card { grid-template-columns: 1fr; }
+    .home-mixed-layout.no-products { grid-template-columns: 1fr; }
+    .home-mixed-layout.no-products .home-mixed-products { display: none; }
+    .home-video-section {
+      width: calc(100% - 28px);
+      margin: 17px 14px 0;
+    }
+    .home-video-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+    .home-video-head h2 { margin: 0; font-size: 17px; line-height: 1; }
+    .home-video-more { flex: none; padding: 0; border: 0; background: transparent; color: #555; font-size: 11px; }
+    .home-video-track {
+      display: flex;
+      gap: 9px;
+      margin-right: -14px;
+      padding-right: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+    }
+    .home-video-track::-webkit-scrollbar { display: none; }
+    .home-video-card {
+      min-width: 0;
+      flex: 0 0 154px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      padding: 0;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      text-align: left;
+    }
+    .home-video-cover {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid #bbb;
+      background: #dedede;
+      color: #777;
+      font-size: 10px;
+    }
+    .home-video-card:nth-child(2) .home-video-cover { background: #d5d5d5; }
+    .home-video-card:nth-child(3) .home-video-cover { background: #e5e5e5; }
+    .home-video-play {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      padding-left: 2px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .88);
+      color: #333;
+      font-size: 14px;
+    }
+    .home-video-source {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 16px 7px 7px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, .7));
+      color: #fff;
+      font-size: 9px;
+    }
+    .home-video-source span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .home-video-copy { display: grid; gap: 7px; padding: 9px; }
+    .home-video-copy strong {
+      min-height: 34px;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .home-video-copy em { color: #333; font-size: 11px; font-style: normal; font-weight: 700; }
+    .home-floating-entry {
+      position: absolute;
+      right: 12px;
+      bottom: calc(74px + env(safe-area-inset-bottom));
+      z-index: 8;
+      width: 70px;
+      min-height: 72px;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: 8px 5px;
+      border: 1px solid #777;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+      font-size: 10px;
+      line-height: 1.25;
+      text-align: center;
+      transition: opacity .12s ease, transform .12s ease;
+    }
+    .home-floating-entry[hidden] { display: none; }
+    .home-floating-entry.is-scrolling { opacity: 0; transform: translateY(8px); pointer-events: none; }
+    .home-floating-icon {
+      width: 42px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px dashed #888;
+      background: #ededed;
+      font-size: 9px;
+      font-weight: 700;
+    }
     .section { margin-top: 17px; }
     .section-title { display: flex; align-items: center; justify-content: space-between; padding: 0 14px 9px; }
     .section-title h2 { margin: 0; font-size: 17px; line-height: 1; letter-spacing: .01em; }
     .section-more { border: 0; background: transparent; color: var(--muted); font-size: 11px; }
     .section-more::after { content: "›"; margin-left: 2px; font-size: 15px; vertical-align: -1px; }
     .live-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0 14px 2px; }
-    .video-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 0 14px 2px; }
+    .video-category-tabs { position: sticky; top: 0; z-index: 3; display: flex; gap: 18px; overflow-x: auto; padding: 10px 14px 11px; border-bottom: 1px solid #ccc; background: var(--page); scrollbar-width: none; }
+    .video-category-tabs::-webkit-scrollbar { display: none; }
+    .video-category-tab { position: relative; flex: none; min-height: 28px; padding: 0; border: 0; background: transparent; color: #666; font-size: 11px; white-space: nowrap; }
+    .video-category-tab.active { color: var(--ink); font-weight: 700; }
+    .video-category-tab.active::after { content: ""; position: absolute; left: 50%; bottom: -4px; width: 20px; height: 2px; transform: translateX(-50%); background: var(--ink); }
+    .video-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 12px 14px 2px; }
+    .video-card[hidden] { display: none; }
+    .video-category-empty { min-height: 260px; display: grid; place-items: center; padding: 20px; color: #777; font-size: 12px; text-align: center; }
+    .video-category-empty[hidden] { display: none; }
     .live-card { min-width: 0; overflow: hidden; border: 1px solid #b1b1b1; border-radius: 6px; background: var(--surface); box-shadow: none; text-align: left; padding: 0; }
     .live-cover { position: relative; width: 100%; aspect-ratio: 3 / 4; display: flex; align-items: center; justify-content: center; padding: 10px; background: #dedede; color: #777; }
     .live-cover::before { display: none; }
@@ -363,11 +554,13 @@
     .publicity-filter { flex: none; min-height: 28px; padding: 0 11px; border: 1px solid #aaa; border-radius: 14px; background: #fff; color: #555; font-size: 10px; }
     .publicity-filter.active { border-color: #555; background: #dedede; color: #222; font-weight: 700; }
     .circle-feed { display: grid; gap: 12px; padding: 12px 14px 0; }
-    .circle-card { padding: 12px; border: 1px solid #aaa; border-radius: 7px; background: #fff; }
-    .circle-author { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: center; }
+    .circle-card { position: relative; padding: 12px; border: 1px solid #aaa; border-radius: 7px; background: #fff; }
+    .circle-author { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: center; padding-right: 62px; }
     .circle-avatar { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #888; border-radius: 50%; background: #e2e2e2; font-size: 10px; font-weight: 700; }
     .circle-author strong { display: block; font-size: 12px; }
     .circle-author time { display: block; margin-top: 2px; color: #888; font-size: 9px; }
+    .circle-favorite { position: absolute; top: 12px; right: 12px; min-width: 54px; min-height: 28px; padding: 4px 7px; border: 1px solid #888; border-radius: 4px; background: #fff; color: #444; font-size: 10px; }
+    .circle-favorite[aria-pressed="true"] { background: #dedede; color: #222; font-weight: 700; }
     .circle-copy { margin: 12px 0 0; color: #444; font-size: 12px; line-height: 1.65; white-space: pre-line; }
     .circle-media-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-top: 12px; }
     .circle-media { position: relative; aspect-ratio: 1; display: grid; place-items: center; overflow: hidden; border: 1px solid #aaa; border-radius: 4px; background: #dedede; color: #777; font-size: 9px; }
@@ -384,6 +577,14 @@
     .circle-actions.sales-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .circle-action { min-height: 38px; border: 0; background: transparent; color: #444; font-size: 11px; }
     .circle-action + .circle-action { border-left: 1px solid #ddd; }
+    .favorite-feed-head { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid #ccc; background: #fff; }
+    .favorite-feed-head strong { font-size: 12px; }
+    .favorite-feed-head small { color: #777; font-size: 10px; }
+    .favorite-source-tag { display: inline-flex; margin: 10px 0 0; padding: 2px 6px; border: 1px solid #aaa; border-radius: 9px; color: #666; font-size: 9px; }
+    .favorite-empty { min-height: 300px; display: grid; align-content: center; justify-items: center; gap: 7px; padding: 24px; color: #777; text-align: center; }
+    .favorite-empty[hidden] { display: none; }
+    .favorite-empty strong { color: #444; font-size: 13px; }
+    .favorite-empty span { font-size: 11px; }
 
     .hot-product-list { margin: 0 14px; overflow: hidden; border: 1px solid #aaa; border-radius: 6px; background: #fff; }
     .hot-product-card { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 10px; background: #fff; text-align: left; }
@@ -400,7 +601,6 @@
     .hot-promote { border: 0; border-left: 1px solid #777; background: #f5f5f5; color: var(--ink); font-size: 11px; font-weight: 600; }
 
     .feed-head { position: sticky; top: 0; z-index: 3; margin-top: 18px; padding-top: 12px; background: var(--page); box-shadow: 0 1px 0 var(--line); }
-    .feed-head .section-title { padding-bottom: 9px; }
     .chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 14px 10px; scrollbar-width: none; }
     .chips::-webkit-scrollbar { display: none; }
     .chip { flex: none; padding: 6px 12px; border: 1px solid #b5b5b5; border-radius: 2px; background: #fff; color: #555; font-size: 12px; }
@@ -493,6 +693,19 @@
     .my-metric strong { display: block; margin-top: 4px; font-family: "Helvetica Neue", sans-serif; font-size: 16px; }
     .my-earning-tooltip { position: absolute; z-index: 5; width: max-content; max-width: 210px; padding: 8px 10px; border-radius: 4px; background: #4f4f4f; color: #fff; font-size: 10px; line-height: 1.5; text-align: center; pointer-events: none; }
     .my-earning-tooltip[hidden] { display: none; }
+    .performance-center-card { padding: 14px; }
+    .performance-center-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .performance-center-head h2 { margin: 0; font-size: 15px; }
+    .performance-detail-entry { flex: none; border: 0; background: transparent; padding: 3px 0; color: #777; font-size: 10px; }
+    .performance-range-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; margin-top: 11px; }
+    .performance-range-tab { height: 29px; border: 1px solid #d2d2d2; border-radius: 4px; background: #f6f6f6; color: #666; font-size: 10px; }
+    .performance-range-tab.active { border-color: #555; background: #333; color: #fff; font-weight: 700; }
+    .performance-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 13px; border-top: 1px solid #e5e5e5; }
+    .performance-metric { min-width: 0; padding: 13px 9px 1px; border-right: 1px solid #e8e8e8; }
+    .performance-metric:first-child { padding-left: 0; }
+    .performance-metric:last-child { border-right: 0; padding-right: 0; }
+    .performance-metric span { display: block; overflow: hidden; color: #858585; font-size: 9px; white-space: nowrap; text-overflow: ellipsis; }
+    .performance-metric strong { display: block; margin-top: 5px; overflow: hidden; font-family: "Helvetica Neue", sans-serif; font-size: 15px; white-space: nowrap; text-overflow: ellipsis; }
     .subscription-assistant-bar { width: calc(100% - 28px); min-height: 58px; display: grid; grid-template-columns: 38px minmax(0, 1fr) 54px; align-items: center; gap: 9px; margin: 12px 14px 0; padding: 9px 11px; border: 1px solid #d2d2d2; border-radius: 7px; background: #fff; color: #333; text-align: left; }
     .subscription-assistant-bar[hidden] { display: none; }
     .subscription-assistant-icon { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid #888; border-radius: 11px; background: #ededed; font-size: 14px; font-weight: 800; }
@@ -506,7 +719,7 @@
     .my-menu-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #999; border-radius: 7px; background: #ededed; font-size: 11px; font-weight: 700; }
     .my-menu-button span:last-child { max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
     .my-service-card { padding: 17px 10px 15px; }
-    .my-service-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 15px; }
+    .my-service-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 15px; }
     .my-service-button { min-width: 0; display: grid; justify-items: center; gap: 6px; border: 0; background: transparent; padding: 0 2px; color: #444; font-size: 10px; }
     .my-service-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #999; border-radius: 7px; background: #ededed; font-size: 11px; font-weight: 700; }
 
@@ -663,6 +876,36 @@
     .commission-empty { min-height: 360px; display: grid; place-items: center; align-content: center; gap: 10px; color: #999; font-size: 10px; }
     .commission-empty[hidden] { display: none; }
     .commission-empty i { width: 52px; height: 58px; display: grid; place-items: center; border: 1px solid #bbb; background: #e8e8e8; font-style: normal; font-size: 18px; }
+    .performance-details-scroll { padding-top: 12px; }
+    .performance-details-summary { margin-bottom: 12px; border: 1px solid #d0d0d0; border-radius: 8px; background: #fff; padding: 13px; }
+    .performance-details-summary .performance-range-tabs { margin-top: 0; }
+    .performance-details-summary .performance-metrics { margin-top: 12px; }
+    .performance-detail-hint { margin: 10px 0 0; color: #888; font-size: 8px; line-height: 1.5; }
+    .performance-order-section-head { display: flex; align-items: center; justify-content: space-between; margin: 16px 1px 9px; }
+    .performance-order-section-head h2 { margin: 0; font-size: 14px; }
+    .performance-order-section-head span { color: #888; font-size: 9px; }
+    .performance-order-list { display: grid; gap: 10px; }
+    .performance-order { overflow: hidden; border: 1px solid #d0d0d0; border-radius: 8px; background: #fff; }
+    .performance-order[hidden] { display: none; }
+    .performance-order-head { min-height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px; border-bottom: 1px solid #e4e4e4; color: #888; font-size: 9px; }
+    .performance-order-status { flex: none; color: #333; font-size: 10px; font-weight: 700; }
+    .performance-order-product { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px; }
+    .performance-product-image { width: 64px; height: 64px; display: grid; place-items: center; border: 1px solid #aaa; border-radius: 5px; background: #e5e5e5; color: #777; font-size: 9px; }
+    .performance-product-copy { min-width: 0; }
+    .performance-product-copy strong { display: -webkit-box; overflow: hidden; font-size: 12px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .performance-product-copy small { display: block; margin-top: 5px; color: #888; font-size: 9px; }
+    .performance-order-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 10px; }
+    .performance-order-value { min-width: 0; border-right: 1px solid #e5e5e5; }
+    .performance-order-value:last-child { border-right: 0; padding-left: 10px; }
+    .performance-order-value span { display: block; color: #888; font-size: 8px; }
+    .performance-order-value strong { display: block; margin-top: 3px; font-family: "Helvetica Neue", sans-serif; font-size: 13px; }
+    .performance-order-meta { display: flex; align-items: center; gap: 6px; padding: 0 12px 11px; color: #888; font-size: 9px; }
+    .performance-source-tag { flex: none; padding: 3px 6px; border-radius: 3px; background: #e8e8e8; color: #555; }
+    .performance-order-number { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .performance-order-copy { min-width: 38px; height: 24px; flex: none; margin-left: auto; border: 1px solid #999; border-radius: 12px; background: #fff; color: #444; font-size: 9px; }
+    .performance-order-empty { min-height: 280px; display: grid; place-items: center; align-content: center; gap: 10px; color: #999; font-size: 10px; }
+    .performance-order-empty[hidden] { display: none; }
+    .performance-order-empty i { width: 52px; height: 58px; display: grid; place-items: center; border: 1px solid #bbb; background: #e8e8e8; font-style: normal; font-size: 18px; }
     .withdraw-records-scroll { padding-top: 12px; }
     .withdraw-record-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; border: 1px solid #ccc; border-radius: 8px; background: #fff; padding: 16px; }
     .withdraw-record-summary span { display: block; color: #777; font-size: 10px; }
@@ -972,6 +1215,9 @@
       .prototype-annotations { display: none; }
       .miniapp-shell { width: 100%; height: 100svh; border: 0; border-radius: 0; box-shadow: none; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .home-floating-entry { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -984,6 +1230,9 @@
           <button class="tree-link tree-level-1 active" type="button" data-tree-page="首页" data-tree-root="true">首页</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".campaign-banner">Banner</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".category-nav">快捷商品频道</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".home-mixed-layout">直播商品混排</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target=".home-video-section">热门短视频</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target="[data-home-floating]">首页悬浮窗</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="首页" data-tree-target="#hotProductTitle">热门商品</button>
           <button class="tree-link tree-level-2" type="button" data-tree-overlay="search-results">搜索结果</button>
           <button class="tree-folder tree-subfolder" type="button" aria-expanded="true" data-tree-toggle="homeProductFlow">商品推广流程</button>
@@ -1002,10 +1251,12 @@
           <button class="tree-link tree-level-1" type="button" data-tree-page="发圈" data-tree-root="true">发圈</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="发圈" data-tree-circle="带货发圈">带货发圈 Feed</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="发圈" data-tree-circle="宣发">宣发 Feed</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-page="发圈" data-tree-circle="收藏">收藏 Feed</button>
           <button class="tree-link tree-level-1" type="button" data-tree-page="我的" data-tree-root="true">我的</button>
           <button class="tree-link tree-level-2" type="button" data-tree-overlay="personal-info">个人信息与设置</button>
           <button class="tree-link tree-level-2" type="button" data-tree-page="我的" data-tree-target=".my-earnings-card">我的收益</button>
-          <button class="tree-link tree-level-2" type="button" data-tree-overlay="commission-details">佣金明细</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-page="我的" data-tree-target=".performance-center-card">业绩中心</button>
+          <button class="tree-link tree-level-2" type="button" data-tree-overlay="performance-details">业绩明细</button>
           <button class="tree-link tree-level-2" type="button" data-tree-overlay="withdraw-records">提现记录</button>
           <button class="tree-link tree-level-2" type="button" data-tree-overlay="withdraw-sign">首次提现签约</button>
           <button class="tree-link tree-level-2" type="button" data-tree-overlay="withdraw">佣金提现</button>
@@ -1026,7 +1277,7 @@
           </div>
         </div>
       </div>
-      <div class="prototype-state"><span id="prototypeState">演示状态：未登录</span><button type="button" data-reset-flow>重置登录与授权状态</button></div>
+      <div class="prototype-state"><span id="prototypeState">演示状态：未登录</span><button type="button" data-home-live-demo aria-pressed="false">演示无直播适配</button><button type="button" data-reset-flow>重置登录与授权状态</button></div>
       <div class="sidebar-note">点击目录可切换页面或定位到对应模块。目录属于原型工具区，不进入小程序正式界面。</div>
     </aside>
 
@@ -1070,6 +1321,7 @@
         <div class="circle-tabs" role="tablist" aria-label="发圈内容分类">
           <button class="circle-tab active" type="button" role="tab" aria-selected="true" data-circle-tab="带货发圈">带货发圈</button>
           <button class="circle-tab" type="button" role="tab" aria-selected="false" data-circle-tab="宣发">宣发</button>
+          <button class="circle-tab" type="button" role="tab" aria-selected="false" data-circle-tab="收藏">收藏</button>
         </div>
         <form class="circle-search-row" data-search-form data-search-scope="circle">
           <div class="circle-search-field"><span class="search-icon">⌕</span><input aria-label="发圈素材搜索" name="query" placeholder="搜索商品或素材关键词"></div>
@@ -1098,6 +1350,70 @@
           <button class="category-button" type="button" data-action="进入套装商品频道"><span class="category-icon">礼</span>套装</button>
         </nav>
 
+        <section class="home-mixed-layout" aria-label="热门直播与商品推荐混排">
+          <section class="home-mixed-live">
+            <span class="home-mixed-head"><strong>热门直播</strong><button class="home-mixed-more" type="button" data-action="进入直播列表">查看更多 &gt;</button></span>
+            <button class="home-mixed-live-cover" type="button" data-home-live-carousel data-action="进入推荐热门直播：黛莱皙官方直播间">
+              <span class="home-mixed-live-slide active" data-live-name="黛莱皙官方直播间">
+                直播封面 1
+                <i class="home-mixed-live-tag">直播中</i>
+                <small>13.8 万人观看</small>
+                <span class="home-mixed-live-host"><i class="home-mixed-live-avatar">主播</i><strong>黛莱皙官方直播间</strong><em>赚 ¥36.00</em></span>
+              </span>
+              <span class="home-mixed-live-slide" data-live-name="黛莱皙福利专场">
+                直播封面 2
+                <i class="home-mixed-live-tag">直播中</i>
+                <small>8.6 万人观看</small>
+                <span class="home-mixed-live-host"><i class="home-mixed-live-avatar">主播</i><strong>黛莱皙福利专场</strong><em>赚 ¥28.00</em></span>
+              </span>
+              <span class="home-mixed-live-slide" data-live-name="夏日修护课堂">
+                直播封面 3
+                <i class="home-mixed-live-tag">直播中</i>
+                <small>5.2 万人观看</small>
+                <span class="home-mixed-live-host"><i class="home-mixed-live-avatar">主播</i><strong>夏日修护课堂</strong><em>赚 ¥22.00</em></span>
+              </span>
+              <span class="home-mixed-live-dots" aria-hidden="true"><i class="active"></i><i></i><i></i></span>
+            </button>
+          </section>
+          <div class="home-mixed-products" aria-label="配置商品卡片">
+            <section class="home-mixed-product-card">
+              <h3>修护精选</h3>
+              <div class="home-mixed-product-grid">
+                <button class="home-mixed-product-item" type="button" data-product="臻润修护精华套装" aria-label="臻润修护精华套装，赚 24 元"><span class="home-mixed-product-sticker">商品贴图<small>含“赚 ¥24.00”</small></span></button>
+                <button class="home-mixed-product-item" type="button" data-product="紧致焕颜面霜组合" aria-label="紧致焕颜面霜组合，赚 39.48 元"><span class="home-mixed-product-sticker">商品贴图<small>含“赚 ¥39.48”</small></span></button>
+              </div>
+            </section>
+            <section class="home-mixed-product-card">
+              <h3>补水套装</h3>
+              <div class="home-mixed-product-grid">
+                <button class="home-mixed-product-item" type="button" data-product="焕亮水乳护肤礼盒" aria-label="焕亮水乳护肤礼盒，赚 32 元"><span class="home-mixed-product-sticker">商品贴图<small>含“赚 ¥32.00”</small></span></button>
+                <button class="home-mixed-product-item" type="button" data-product="净透清洁护理套装" aria-label="净透清洁护理套装，赚 19.08 元"><span class="home-mixed-product-sticker">商品贴图<small>含“赚 ¥19.08”</small></span></button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="home-video-section" aria-labelledby="homeVideoTitle">
+          <div class="home-video-head">
+            <h2 id="homeVideoTitle">热门短视频</h2>
+            <button class="home-video-more" type="button" data-home-video-more>更多短视频 &gt;</button>
+          </div>
+          <div class="home-video-track" aria-label="推荐热门短视频，左右滑动查看更多">
+            <button class="home-video-card" type="button" data-action="跳转视频号：防晒乳正确使用方法">
+              <span class="home-video-cover">短视频封面<span class="home-video-play">▶</span><span class="home-video-source"><span>黛莱皙官方</span><span>♡ 36</span></span></span>
+              <span class="home-video-copy"><strong>防晒乳正确使用方法｜清爽自然不搓泥</strong><em>赚 ¥10.62</em></span>
+            </button>
+            <button class="home-video-card" type="button" data-action="跳转视频号：水乳搭配使用顺序">
+              <span class="home-video-cover">短视频封面<span class="home-video-play">▶</span><span class="home-video-source"><span>黛莱皙官方</span><span>♡ 22</span></span></span>
+              <span class="home-video-copy"><strong>水乳搭配使用顺序｜基础保湿不踩坑</strong><em>赚 ¥32.00</em></span>
+            </button>
+            <button class="home-video-card" type="button" data-action="跳转视频号：温和洁面技巧">
+              <span class="home-video-cover">短视频封面<span class="home-video-play">▶</span><span class="home-video-source"><span>合作达人</span><span>♡ 18</span></span></span>
+              <span class="home-video-copy"><strong>温和洁面技巧｜减少清洁后的紧绷感</strong><em>赚 ¥10.00</em></span>
+            </button>
+          </div>
+        </section>
+
         <section class="section" aria-labelledby="hotProductTitle">
           <div class="section-title"><h2 id="hotProductTitle">热门商品</h2></div>
           <div class="hot-product-list">
@@ -1124,8 +1440,7 @@
           </div>
         </section>
 
-        <section class="feed-head" aria-labelledby="feedTitle">
-          <div class="section-title"><h2 id="feedTitle">全部商品</h2></div>
+        <section class="feed-head" id="feedTitle" aria-label="商品分类筛选">
           <div class="chips" aria-label="商品分类筛选">
             <button class="chip active" type="button" data-category="全部">全部</button>
             <button class="chip" type="button" data-category="新品">新品</button>
@@ -1222,24 +1537,37 @@
         </section>
 
         <section class="media-tab-panel" data-media-panel="视频" aria-label="全部视频" hidden>
+          <nav class="video-category-tabs" role="tablist" aria-label="按关联商品分类筛选视频">
+            <button class="video-category-tab active" type="button" role="tab" aria-selected="true" data-video-category-filter="精选">精选</button>
+            <button class="video-category-tab" type="button" role="tab" aria-selected="false" data-video-category-filter="个护美妆">个护美妆</button>
+            <button class="video-category-tab" type="button" role="tab" aria-selected="false" data-video-category-filter="食品饮料">食品饮料</button>
+            <button class="video-category-tab" type="button" role="tab" aria-selected="false" data-video-category-filter="家清日用">家清日用</button>
+            <button class="video-category-tab" type="button" role="tab" aria-selected="false" data-video-category-filter="水果生鲜">水果生鲜</button>
+            <button class="video-category-tab" type="button" role="tab" aria-selected="false" data-video-category-filter="其他">其他</button>
+          </nav>
           <div class="video-grid">
-            <article class="video-card" data-action="跳转视频号：若泉防晒乳 SPF50+">
+            <article class="video-card" data-video-category="个护美妆" data-action="跳转视频号：若泉防晒乳 SPF50+">
               <div class="video-cover"><span class="play-button">▶</span><div class="video-identity"><span>黛莱皙好物官方</span><span>♡ 14</span></div></div>
               <div class="video-info"><h3>若泉防晒乳 SPF50+｜清爽自然防晒</h3><div class="video-value-row"><span class="video-price">¥89.00</span><strong class="video-commission">赚 ¥10.62</strong></div></div>
             </article>
-            <article class="video-card" data-action="跳转视频号：精华正确使用方法">
+            <article class="video-card" data-video-category="个护美妆" data-action="跳转视频号：精华正确使用方法">
               <div class="video-cover"><span class="play-button">▶</span><div class="video-identity"><span>黛莱皙好物官方</span><span>♡ 36</span></div></div>
               <div class="video-info"><h3>精华正确使用方法｜三步修护肌肤</h3><div class="video-value-row"><span class="video-price">¥199.00</span><strong class="video-commission">赚 ¥24.00</strong></div></div>
             </article>
-            <article class="video-card" data-action="跳转视频号：水乳搭配使用顺序">
+            <article class="video-card" data-video-category="家清日用" data-action="跳转视频号：沫檬地板清洁剂强力去污">
               <div class="video-cover"><span class="play-button">▶</span><div class="video-identity"><span>黛莱皙好物官方</span><span>♡ 22</span></div></div>
-              <div class="video-info"><h3>水乳搭配使用顺序｜基础保湿不踩坑</h3><div class="video-value-row"><span class="video-price">¥269.00</span><strong class="video-commission">赚 ¥32.00</strong></div></div>
+              <div class="video-info"><h3>沫檬地板清洁剂｜强力去污不留痕</h3><div class="video-value-row"><span class="video-price">¥39.90</span><strong class="video-commission">赚 ¥6.38</strong></div></div>
             </article>
-            <article class="video-card" data-action="跳转视频号：温和洁面技巧">
+            <article class="video-card" data-video-category="食品饮料" data-action="跳转视频号：黑猪肉小笼包家庭装">
               <div class="video-cover"><span class="play-button">▶</span><div class="video-identity"><span>黛莱皙好物官方</span><span>♡ 18</span></div></div>
-              <div class="video-info"><h3>温和洁面技巧｜减少清洁后的紧绷感</h3><div class="video-value-row"><span class="video-price">¥89.00</span><strong class="video-commission">赚 ¥10.00</strong></div></div>
+              <div class="video-info"><h3>黑猪肉小笼包｜早餐快速上桌</h3><div class="video-value-row"><span class="video-price">¥69.90</span><strong class="video-commission">赚 ¥8.40</strong></div></div>
+            </article>
+            <article class="video-card" data-video-category="水果生鲜" data-action="跳转视频号：阳光玫瑰葡萄礼盒">
+              <div class="video-cover"><span class="play-button">▶</span><div class="video-identity"><span>黛莱皙好物官方</span><span>♡ 29</span></div></div>
+              <div class="video-info"><h3>阳光玫瑰葡萄礼盒｜现摘脆甜多汁</h3><div class="video-value-row"><span class="video-price">¥49.90</span><strong class="video-commission">赚 ¥7.48</strong></div></div>
             </article>
           </div>
+          <div class="video-category-empty" data-video-category-empty hidden>当前分类暂无推广视频</div>
         </section>
       </div>
 
@@ -1253,16 +1581,18 @@
             <button class="publicity-filter" type="button" data-circle-filter>直播素材</button>
           </div>
           <div class="circle-feed">
-            <article class="circle-card">
+            <article class="circle-card" data-circle-item-id="circle-sales-001" data-circle-source="带货发圈">
               <div class="circle-author"><span class="circle-avatar">黛</span><div><strong>黛莱皙官方</strong><time>07-21 09:20</time></div></div>
+              <button class="circle-favorite" type="button" data-circle-favorite aria-pressed="false">☆ 收藏</button>
               <p class="circle-copy">换季护肤别着急，清洁、补水和修护要按顺序来。黛莱皙臻润修护精华套装，适合分享给需要日常维稳的朋友。</p>
               <div class="circle-media-grid"><div class="circle-media">素材图片 1</div><div class="circle-media">素材图片 2</div><div class="circle-media">素材图片 3<span class="circle-media-more">+2</span></div></div>
               <div class="circle-linked-product"><div class="circle-product-image">商品主图</div><div class="circle-product-copy"><strong>臻润修护精华套装</strong><small>¥199.00</small></div><span class="circle-product-income">赚 ¥24.00</span></div>
               <div class="circle-actions sales-actions"><button class="circle-action" type="button" data-action="已复制臻润修护精华套装评论">复制评论</button><button class="circle-action" type="button" data-circle-share="臻润修护精华套装发圈素材">分享好物</button><button class="circle-action" type="button" data-action="下载臻润修护精华套装发圈素材">下载素材</button></div>
             </article>
 
-            <article class="circle-card">
+            <article class="circle-card" data-circle-item-id="circle-sales-002" data-circle-source="带货发圈">
               <div class="circle-author"><span class="circle-avatar">黛</span><div><strong>黛莱皙好物助手</strong><time>07-20 16:45</time></div></div>
+              <button class="circle-favorite" type="button" data-circle-favorite aria-pressed="false">☆ 收藏</button>
               <p class="circle-copy">补水不是简单叠加产品，水乳搭配顺序也很重要。整理了一组焕亮水乳护肤礼盒素材，可复制评论、分享好物或下载后手动发布。</p>
               <div class="circle-media-grid"><div class="circle-media">素材图片 1</div><div class="circle-media">素材图片 2</div><div class="circle-media">素材图片 3</div></div>
               <div class="circle-linked-product"><div class="circle-product-image">商品主图</div><div class="circle-product-copy"><strong>焕亮水乳护肤礼盒</strong><small>¥269.00</small></div><span class="circle-product-income">赚 ¥32.00</span></div>
@@ -1280,19 +1610,30 @@
             <button class="publicity-filter" type="button" data-publicity-filter>节日问候</button>
           </div>
           <div class="circle-feed">
-            <article class="circle-card">
+            <article class="circle-card" data-circle-item-id="circle-publicity-001" data-circle-source="宣发">
               <div class="circle-author"><span class="circle-avatar">宣</span><div><strong>黛莱皙品牌运营</strong><time>07-19 14:30</time></div></div>
+              <button class="circle-favorite" type="button" data-circle-favorite aria-pressed="false">☆ 收藏</button>
               <p class="circle-copy">黛莱皙夏季护肤课堂即将开始，本期围绕清洁、补水与修护展开，欢迎伙伴下载素材并转发活动通知。</p>
               <div class="circle-media-grid"><div class="circle-media">宣发主视觉</div><div class="circle-media">课程信息图</div><div class="circle-media">活动日程</div></div>
               <div class="circle-actions"><button class="circle-action" type="button" data-action="已复制夏季护肤课堂宣发文案">复制文案</button><button class="circle-action" type="button" data-action="下载夏季护肤课堂宣发素材">下载素材</button></div>
             </article>
 
-            <article class="circle-card">
+            <article class="circle-card" data-circle-item-id="circle-publicity-002" data-circle-source="宣发">
               <div class="circle-author"><span class="circle-avatar">宣</span><div><strong>黛莱皙品牌运营</strong><time>07-18 10:15</time></div></div>
+              <button class="circle-favorite" type="button" data-circle-favorite aria-pressed="false">☆ 收藏</button>
               <p class="circle-copy">品牌月度伙伴故事更新，记录真实成长与服务成果。本素材仅用于品牌宣传，不携带推客参数或计佣信息。</p>
               <div class="circle-media-grid"><div class="circle-media">品牌故事图 1</div><div class="circle-media">品牌故事图 2</div><div class="circle-media">品牌故事图 3<span class="circle-media-more">+1</span></div></div>
               <div class="circle-actions"><button class="circle-action" type="button" data-action="已复制品牌故事宣发文案">复制文案</button><button class="circle-action" type="button" data-action="下载品牌故事宣发素材">下载素材</button></div>
             </article>
+          </div>
+        </section>
+
+        <section class="circle-panel" data-circle-panel="收藏" aria-label="收藏的发圈内容" hidden>
+          <div class="favorite-feed-head"><strong>收藏内容</strong><small data-favorite-count>共 0 条</small></div>
+          <div class="circle-feed" data-favorite-feed></div>
+          <div class="favorite-empty" data-favorite-empty>
+            <strong>暂无收藏内容</strong>
+            <span>在带货发圈或宣发内容右上角点击“收藏”</span>
           </div>
         </section>
       </div>
@@ -1322,6 +1663,24 @@
           <div class="my-earning-tooltip" id="myEarningTooltip" role="tooltip" hidden></div>
         </section>
 
+        <section class="my-card performance-center-card" aria-label="业绩中心">
+          <div class="performance-center-head">
+            <h2>业绩中心</h2>
+            <button class="performance-detail-entry" type="button" data-performance-entry>查看明细 ›</button>
+          </div>
+          <div class="performance-range-tabs" role="tablist" aria-label="业绩统计时间">
+            <button class="performance-range-tab active" type="button" role="tab" aria-selected="true" data-performance-range="全部">全部</button>
+            <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-range="今日">今日</button>
+            <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-range="近7日">近7日</button>
+            <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-range="近30日">近30日</button>
+          </div>
+          <div class="performance-metrics">
+            <div class="performance-metric"><span>总交易额</span><strong data-performance-metric="amount">¥18,760.00</strong></div>
+            <div class="performance-metric"><span>总推广订单</span><strong data-performance-metric="orders">128</strong></div>
+            <div class="performance-metric"><span>总收益</span><strong data-performance-metric="income">¥2,286.60</strong></div>
+          </div>
+        </section>
+
         <section class="subscription-assistant-bar" aria-label="订阅通知小助手" data-subscription-assistant>
           <span class="subscription-assistant-icon" aria-hidden="true">订</span>
           <span class="subscription-assistant-copy"><strong>订阅通知小助手</strong><small id="subscriptionAssistantStatus">授权订阅，收益、提现、好友、活动消息第一时间接收通知</small></span>
@@ -1330,7 +1689,7 @@
 
         <section class="my-card my-menu-card" aria-label="功能入口">
           <div class="my-menu-grid">
-            <button class="my-menu-button" type="button" data-commission-entry><span class="my-menu-icon">佣</span><span>佣金明细</span></button>
+            <button class="my-menu-button" type="button" data-tutorial-entry><span class="my-menu-icon">教</span><span>推客教程</span></button>
             <button class="my-menu-button" type="button" data-withdraw-records-entry><span class="my-menu-icon">提</span><span>提现记录</span></button>
             <button class="my-menu-button" type="button" data-fans-entry><span class="my-menu-icon">粉</span><span>我的粉丝</span></button>
             <button class="my-menu-button" type="button" data-invite-entry><span class="my-menu-icon">邀</span><span>邀请好友</span></button>
@@ -1339,13 +1698,17 @@
 
         <section class="my-card my-service-card" aria-label="服务入口">
           <div class="my-service-list">
-            <button class="my-service-button" type="button" data-tutorial-entry><span class="my-service-icon">教</span><span>推客教程</span></button>
             <button class="my-service-button" type="button" data-action="跳转企业微信客服"><span class="my-service-icon">客</span><span>官方客服</span></button>
             <button class="my-service-button" type="button" data-help-center-entry><span class="my-service-icon">帮</span><span>帮助中心</span></button>
             <button class="my-service-button" type="button" data-personal-entry><span class="my-service-icon">设</span><span>系统设置</span></button>
           </div>
         </section>
       </div>
+
+      <button class="home-floating-entry" type="button" data-home-floating data-action="按后台配置跳转：推客新手教程" aria-label="打开推客新手教程">
+        <span class="home-floating-icon">配置图标</span>
+        <span>新手教程</span>
+      </button>
 
       <nav class="tabbar" aria-label="小程序底部导航">
         <button class="tab-item active" type="button" data-nav="首页"><span class="tab-icon">⌂</span>首页</button>
@@ -1436,9 +1799,9 @@
           </section>
           <section class="help-card" id="helpOrder" data-help-section="order">
             <h2 class="help-card-title"><i>单</i>关于订单</h2>
-            <article class="help-qa"><strong>Q：为什么找不到推广订单？</strong><p>A：仅展示通过有效推广链路归因的订单，数据同步可能存在延迟，可稍后在佣金明细中查看。</p></article>
+            <article class="help-qa"><strong>Q：为什么找不到推广订单？</strong><p>A：仅展示通过有效推广链路归因的订单，数据同步可能存在延迟，可稍后在业绩明细中查看。</p></article>
             <article class="help-qa"><strong>Q：订单为什么显示待结算？</strong><p>A：订单可能仍处于收货或售后周期，最终状态以微信官方结算结果为准。</p></article>
-            <article class="help-qa"><strong>Q：在哪里查看订单佣金？</strong><p>A：进入“我的”，点击“佣金明细”查看推广订单及对应佣金。</p></article>
+            <article class="help-qa"><strong>Q：在哪里查看推广业绩？</strong><p>A：进入“我的”，在“业绩中心”查看汇总指标，并点击“查看明细”查看推广订单。</p></article>
           </section>
           <section class="help-card" id="helpCommission" data-help-section="commission">
             <h2 class="help-card-title"><i>佣</i>关于佣金</h2>
@@ -1521,52 +1884,54 @@
         </div>
       </section>
 
-      <section class="relation-view commission-view" id="commissionView" aria-label="佣金明细" hidden>
+      <section class="relation-view performance-details-view" id="performanceDetailsView" aria-label="业绩明细" hidden>
         <header class="personal-info-header">
           <div class="statusbar"><span>9:41</span><span class="status-icons"><i class="signal"></i><i>▮▮</i><i class="battery"></i></span></div>
-          <div class="personal-info-navigation"><button class="personal-info-back" type="button" data-commission-back aria-label="返回">‹</button><h1>佣金明细</h1><div class="wx-capsule" aria-label="微信小程序原生菜单"><span>•••</span><i class="wx-divider"></i><span class="wx-dot">○</span></div></div>
+          <div class="personal-info-navigation"><button class="personal-info-back" type="button" data-performance-back aria-label="返回">‹</button><h1>业绩明细</h1><div class="wx-capsule" aria-label="微信小程序原生菜单"><span>•••</span><i class="wx-divider"></i><span class="wx-dot">○</span></div></div>
         </header>
-        <div class="relation-scroll commission-scroll">
-          <section class="commission-filter-panel" aria-label="佣金订单筛选">
-            <div class="commission-filter-row" role="tablist" aria-label="佣金状态">
-              <button class="commission-filter active" type="button" role="tab" aria-selected="true" data-commission-filter="全部">全部</button>
-              <button class="commission-filter" type="button" role="tab" aria-selected="false" data-commission-filter="待结算">待结算</button>
-              <button class="commission-filter" type="button" role="tab" aria-selected="false" data-commission-filter="已结算">已结算</button>
-              <button class="commission-filter" type="button" role="tab" aria-selected="false" data-commission-filter="已失效">已失效</button>
-              <button class="commission-time-filter" type="button" data-commission-time>近30天⌄</button>
+        <div class="relation-scroll performance-details-scroll">
+          <section class="performance-details-summary" aria-label="业绩汇总">
+            <div class="performance-range-tabs" role="tablist" aria-label="业绩明细统计时间">
+              <button class="performance-range-tab active" type="button" role="tab" aria-selected="true" data-performance-detail-range="全部">全部</button>
+              <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-detail-range="今日">今日</button>
+              <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-detail-range="近7日">近7日</button>
+              <button class="performance-range-tab" type="button" role="tab" aria-selected="false" data-performance-detail-range="近30日">近30日</button>
             </div>
+            <div class="performance-metrics">
+              <div class="performance-metric"><span>总交易额</span><strong data-performance-detail-metric="amount">¥18,760.00</strong></div>
+              <div class="performance-metric"><span>总推广订单</span><strong data-performance-detail-metric="orders">128</strong></div>
+              <div class="performance-metric"><span>总收益</span><strong data-performance-detail-metric="income">¥2,286.60</strong></div>
+            </div>
+            <p class="performance-detail-hint">数据按有效推广归因订单统计；退款、失效订单会按平台最终结果扣减。</p>
           </section>
 
-          <div class="commission-order-list" id="commissionOrderList" aria-live="polite">
-            <article class="commission-order" data-commission-order="待结算">
-              <span class="commission-order-head"><span>下单时间 07-22 15:48</span><span class="commission-order-status">待结算</span></span>
-              <span class="commission-order-product"><span class="commission-product-image">商品图</span><span class="commission-product-copy"><strong>臻润修护精华套装</strong><small>黛莱皙官方旗舰店</small></span><span class="commission-order-payment"><strong>¥199.00</strong><small>支付 · ×1</small></span></span>
-              <span class="commission-order-meta"><span class="commission-source-tag">商品分享</span><span class="commission-order-number">订单号 4200****8162</span><button class="commission-order-copy" type="button" aria-label="复制订单号 4200****8162" data-copy-order="420072215481620001">复制</button></span>
-              <span class="commission-income-row"><span class="commission-income-copy"><span>预估佣金</span><small>售后期结束后进入结算</small></span><strong>¥24.00</strong></span>
+          <div class="performance-order-section-head"><h2>推广订单明细</h2><span id="performanceOrderCount">共 4 笔</span></div>
+          <div class="performance-order-list" id="performanceOrderList" aria-live="polite">
+            <article class="performance-order" data-performance-order-ranges="全部 今日 近7日 近30日">
+              <div class="performance-order-head"><span>下单时间 07-24 10:18</span><span class="performance-order-status">待结算</span></div>
+              <div class="performance-order-product"><span class="performance-product-image">商品图</span><span class="performance-product-copy"><strong>臻润修护精华套装</strong><small>黛莱皙官方旗舰店 · ×1</small><span class="performance-order-values"><span class="performance-order-value"><span>交易金额</span><strong>¥199.00</strong></span><span class="performance-order-value"><span>推广收益</span><strong>¥24.00</strong></span></span></span></div>
+              <div class="performance-order-meta"><span class="performance-source-tag">商品分享</span><span class="performance-order-number">订单号 4200****8162</span><button class="performance-order-copy" type="button" aria-label="复制订单号 4200****8162" data-copy-order="420072410188162001">复制</button></div>
             </article>
 
-            <article class="commission-order" data-commission-order="已结算">
-              <span class="commission-order-head"><span>下单时间 07-20 20:16</span><span class="commission-order-status">已结算</span></span>
-              <span class="commission-order-product"><span class="commission-product-image">商品图</span><span class="commission-product-copy"><strong>焕亮水乳护肤礼盒</strong><small>黛莱皙官方直播间</small></span><span class="commission-order-payment"><strong>¥269.00</strong><small>支付 · ×1</small></span></span>
-              <span class="commission-order-meta"><span class="commission-source-tag">直播间</span><span class="commission-order-number">订单号 4200****5279</span><button class="commission-order-copy" type="button" aria-label="复制订单号 4200****5279" data-copy-order="420072020165279002">复制</button></span>
-              <span class="commission-income-row"><span class="commission-income-copy"><span>实际佣金</span><small>结算时间 07-21 10:32</small></span><strong>¥32.00</strong></span>
+            <article class="performance-order" data-performance-order-ranges="全部 近7日 近30日">
+              <div class="performance-order-head"><span>下单时间 07-21 20:16</span><span class="performance-order-status">已结算</span></div>
+              <div class="performance-order-product"><span class="performance-product-image">商品图</span><span class="performance-product-copy"><strong>焕亮水乳护肤礼盒</strong><small>黛莱皙官方直播间 · ×1</small><span class="performance-order-values"><span class="performance-order-value"><span>交易金额</span><strong>¥269.00</strong></span><span class="performance-order-value"><span>推广收益</span><strong>¥32.00</strong></span></span></span></div>
+              <div class="performance-order-meta"><span class="performance-source-tag">直播间</span><span class="performance-order-number">订单号 4200****5279</span><button class="performance-order-copy" type="button" aria-label="复制订单号 4200****5279" data-copy-order="420072120165279002">复制</button></div>
             </article>
 
-            <article class="commission-order" data-commission-order="待结算">
-              <span class="commission-order-head"><span>下单时间 07-18 09:25</span><span class="commission-order-status">待结算</span></span>
-              <span class="commission-order-product"><span class="commission-product-image">商品图</span><span class="commission-product-copy"><strong>净透清洁护理套装</strong><small>黛莱皙官方旗舰店</small></span><span class="commission-order-payment"><strong>¥159.00</strong><small>支付 · ×1</small></span></span>
-              <span class="commission-order-meta"><span class="commission-source-tag">商品分享</span><span class="commission-self-tag">自购</span><span class="commission-order-number">订单号 4200****1934</span><button class="commission-order-copy" type="button" aria-label="复制订单号 4200****1934" data-copy-order="420071809251934003">复制</button></span>
-              <span class="commission-income-row"><span class="commission-income-copy"><span>预估佣金</span><small>订单已支付，等待平台结算</small></span><strong>¥19.08</strong></span>
+            <article class="performance-order" data-performance-order-ranges="全部 近30日">
+              <div class="performance-order-head"><span>下单时间 07-12 09:25</span><span class="performance-order-status">待结算</span></div>
+              <div class="performance-order-product"><span class="performance-product-image">商品图</span><span class="performance-product-copy"><strong>净透清洁护理套装</strong><small>黛莱皙官方旗舰店 · ×1</small><span class="performance-order-values"><span class="performance-order-value"><span>交易金额</span><strong>¥159.00</strong></span><span class="performance-order-value"><span>推广收益</span><strong>¥19.08</strong></span></span></span></div>
+              <div class="performance-order-meta"><span class="performance-source-tag">短视频</span><span class="performance-order-number">订单号 4200****1934</span><button class="performance-order-copy" type="button" aria-label="复制订单号 4200****1934" data-copy-order="420071209251934003">复制</button></div>
             </article>
 
-            <article class="commission-order" data-commission-order="已失效">
-              <span class="commission-order-head"><span>下单时间 07-12 14:03</span><span class="commission-order-status">已失效</span></span>
-              <span class="commission-order-product"><span class="commission-product-image">商品图</span><span class="commission-product-copy"><strong>柔润洁面乳</strong><small>黛莱皙官方旗舰店</small></span><span class="commission-order-payment"><strong>¥89.00</strong><small>支付 · ×1</small></span></span>
-              <span class="commission-order-meta"><span class="commission-source-tag">商品分享</span><span class="commission-order-number">订单号 4200****6408</span><button class="commission-order-copy" type="button" aria-label="复制订单号 4200****6408" data-copy-order="420071214036408004">复制</button></span>
-              <span class="commission-income-row"><span class="commission-income-copy"><span>佣金已失效</span><small>订单已退款</small></span><strong>¥0.00</strong></span>
+            <article class="performance-order" data-performance-order-ranges="全部">
+              <div class="performance-order-head"><span>下单时间 06-08 14:03</span><span class="performance-order-status">已失效</span></div>
+              <div class="performance-order-product"><span class="performance-product-image">商品图</span><span class="performance-product-copy"><strong>柔润洁面乳</strong><small>黛莱皙官方旗舰店 · ×1</small><span class="performance-order-values"><span class="performance-order-value"><span>交易金额</span><strong>¥89.00</strong></span><span class="performance-order-value"><span>推广收益</span><strong>¥0.00</strong></span></span></span></div>
+              <div class="performance-order-meta"><span class="performance-source-tag">商品分享</span><span class="performance-order-number">订单号 4200****6408</span><button class="performance-order-copy" type="button" aria-label="复制订单号 4200****6408" data-copy-order="420060814036408004">复制</button></div>
             </article>
           </div>
-          <div class="commission-empty" id="commissionEmpty" hidden><i>单</i><span>当前筛选暂无订单</span></div>
+          <div class="performance-order-empty" id="performanceOrderEmpty" hidden><i>单</i><span>当前时间范围暂无推广订单</span></div>
         </div>
       </section>
 
@@ -1818,6 +2183,9 @@
         <div class="annotation-context" data-annotation-context="home">
           <section class="annotation-card card-entry"><span class="annotation-number">1</span><h3>商品卡与按钮是两个热区</h3><p>点击卡片正文进入商品详情，不触发登录或推广大使开通。</p></section>
           <section class="annotation-card home-share-entry"><span class="annotation-number">2</span><h3>“去分享”执行门禁</h3><p>未登录先登录，未授权再授权；条件满足后自动进入商品分享。</p></section>
+          <section class="annotation-card"><span class="annotation-number">3</span><h3>首页悬浮窗由后台配置</h3><p>仅首页展示；开始滑动时立即隐藏，停止滑动 300ms 后恢复；停用或配置无效时不展示。</p></section>
+          <section class="annotation-card"><span class="annotation-number">4</span><h3>直播商品混排规则</h3><p>有直播时左侧轮播直播、右侧纵向排列商品卡；无直播时不留空位，2 张商品卡横向平分，1 张商品卡铺满整行；无商品卡时直播铺满整行。</p></section>
+          <section class="annotation-card"><span class="annotation-number">5</span><h3>热门短视频由推荐产生</h3><p>仅展示已上架且已推荐的视频，按推荐排序横向滑动；取消推荐或下架后自动移出首页。</p></section>
         </div>
         <div class="annotation-context" data-annotation-context="category" hidden></div>
         <div class="annotation-context" data-annotation-context="media-live" hidden>
@@ -1827,7 +2195,8 @@
           <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>分享最终由直播间承接</h3><p>底部“进入直播间”打开对应视频号直播间，用户再使用微信原生分享；进入直播间不等于已完成分享。</p></section>
         </div>
         <div class="annotation-context" data-annotation-context="media-video" hidden>
-          <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>视频卡直达视频号</h3><p>点击整张视频卡直接跳转对应视频号视频，不进入小程序详情，也不经过商品分享门禁。</p></section>
+          <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>按关联商品类目筛选</h3><p>“精选”默认展示全部有效视频；其他分类取视频关联主推商品的商品类目，切换后只展示对应类目视频。</p></section>
+          <section class="annotation-card media-entry"><span class="annotation-number">2</span><h3>视频卡直达视频号</h3><p>点击整张视频卡直接跳转对应视频号视频，不进入小程序详情，也不经过商品分享门禁。</p></section>
         </div>
         <div class="annotation-context" data-annotation-context="circle-sales" hidden>
           <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>“分享好物”的对象由素材固定</h3><p>“复制评论”复制后台已审核的评论话术；“分享好物”完成登录和推广大使开通后，调起该素材预设的小程序落地对象，不提供二次选品。</p></section>
@@ -1835,12 +2204,16 @@
         <div class="annotation-context" data-annotation-context="circle-publicity" hidden>
           <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>宣发不携带带货归因</h3><p>宣发素材只提供复制文案和下载素材，不携带推客参数，也不展示佣金或带货承诺。</p></section>
         </div>
+        <div class="annotation-context" data-annotation-context="circle-favorites" hidden>
+          <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>收藏 Feed 合并两类内容</h3><p>带货发圈和宣发卡片均可收藏；收藏后立即进入统一收藏 Feed，按最近收藏时间倒序展示，取消收藏后同步移除。</p></section>
+        </div>
         <div class="annotation-context" data-annotation-context="my" hidden>
           <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>可提现与待结算分开</h3><p>可提现佣金只包含已进入机构可支付余额的金额；待结算佣金不能发起提现。</p></section>
           <section class="annotation-card ai-entry"><span class="annotation-number">2</span><h3>未开通不展示模拟金额</h3><p>未登录或未开通推广大使时显示引导状态，收益字段使用“--”，不以 0 元伪装为真实查询结果。</p></section>
+          <section class="annotation-card media-entry"><span class="annotation-number">3</span><h3>业绩中心统一时间口径</h3><p>总交易额、总推广订单和总收益同步响应“全部、今日、近7日、近30日”；进入明细时继承当前选择。</p></section>
         </div>
-        <div class="annotation-context" data-annotation-context="commission-details" hidden>
-          <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>佣金金额随结算状态变化</h3><p>待结算订单展示预估佣金，已结算订单展示实际佣金；已失效订单显示平台返回的可解释原因。</p></section>
+        <div class="annotation-context" data-annotation-context="performance-details" hidden>
+          <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>汇总与订单共用时间范围</h3><p>切换统计时间后，三项汇总指标和下方推广订单同步刷新；退款、失效订单按平台最终结果扣减。</p></section>
         </div>
         <div class="annotation-context" data-annotation-context="withdraw-records" hidden>
           <section class="annotation-card media-entry"><span class="annotation-number">1</span><h3>实际到账以最终处理结果为准</h3><p>处理中不提前展示税费或到账金额；失败或退回时展示原因，并明确冻结金额是否已释放回可提现余额。</p></section>
@@ -1944,6 +2317,53 @@
       pendingAction: null
     };
 
+    function initializeHomeLiveCarousel() {
+      const carousel = document.querySelector('[data-home-live-carousel]');
+      if (!carousel) return;
+      const slides = Array.from(carousel.querySelectorAll('.home-mixed-live-slide'));
+      const dots = Array.from(carousel.querySelectorAll('.home-mixed-live-dots i'));
+      if (slides.length < 2) return;
+      let activeIndex = 0;
+      let carouselTimer;
+      const showSlide = index => {
+        activeIndex = index % slides.length;
+        slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === activeIndex));
+        dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === activeIndex));
+        carousel.dataset.action = `进入推荐热门直播：${slides[activeIndex].dataset.liveName}`;
+      };
+      const startCarousel = () => {
+        window.clearInterval(carouselTimer);
+        carouselTimer = window.setInterval(() => showSlide(activeIndex + 1), 3200);
+      };
+      carousel.addEventListener('mouseenter', () => window.clearInterval(carouselTimer));
+      carousel.addEventListener('mouseleave', startCarousel);
+      startCarousel();
+    }
+
+    function setHomeLiveDemo(hasLive) {
+      const layout = document.querySelector('.home-mixed-layout');
+      const button = document.querySelector('[data-home-live-demo]');
+      if (!layout || !button) return;
+      layout.classList.toggle('no-live', !hasLive);
+      button.setAttribute('aria-pressed', String(!hasLive));
+      button.textContent = hasLive ? '演示无直播适配' : '恢复直播商品混排';
+    }
+
+    function initializeHomeFloatingScroll() {
+      const homeScroll = document.getElementById('appScroll');
+      const floatingEntry = document.querySelector('[data-home-floating]');
+      if (!homeScroll || !floatingEntry) return;
+      let restoreTimer;
+      homeScroll.addEventListener('scroll', () => {
+        if (floatingEntry.hidden) return;
+        floatingEntry.classList.add('is-scrolling');
+        window.clearTimeout(restoreTimer);
+        restoreTimer = window.setTimeout(() => {
+          floatingEntry.classList.remove('is-scrolling');
+        }, 300);
+      }, { passive: true });
+    }
+
     function getProduct(productName) {
       return productCatalog[productName] || productCatalog['臻润修护精华套装'];
     }
@@ -1980,6 +2400,7 @@
       visibilityButton.textContent = myEarningsVisible ? '◎' : '◉';
       visibilityButton.setAttribute('aria-label', myEarningsVisible ? '隐藏收益金额' : '显示收益金额');
       document.querySelector('[data-subscription-assistant]').hidden = prototypeUser.subscriptionRequested;
+      setPerformanceRange(currentPerformanceRange);
     }
 
     function closeEarningTip() {
@@ -2023,8 +2444,9 @@
       'media-video': '视频页 · 视频号跳转边界',
       'circle-sales': '带货发圈 · 固定分享对象',
       'circle-publicity': '宣发素材 · 无带货归因',
-      my: '我的 · 身份与收益概览',
-      'commission-details': '佣金明细 · 订单与佣金状态',
+      'circle-favorites': '收藏 Feed · 跨类型内容收藏',
+      my: '我的 · 身份、收益与业绩概览',
+      'performance-details': '业绩明细 · 汇总与推广订单',
       'withdraw-records': '提现记录 · 申请与到账结果',
       fans: '我的粉丝 · 直接邀请关系',
       invite: '邀请好友 · 邀请素材与分享',
@@ -2056,7 +2478,7 @@
         ['searchResultsView', 'search-results'],
         ['tutorialView', 'tutorial'],
         ['withdrawRecordsView', 'withdraw-records'],
-        ['commissionView', 'commission-details'],
+        ['performanceDetailsView', 'performance-details'],
         ['fansView', 'fans'],
         ['inviteView', 'invite'],
         ['inviteMessageView', 'invite-message'],
@@ -2106,7 +2528,7 @@
       }
       if (activePage === '发圈') {
         const circleType = document.querySelector('[data-circle-tab].active')?.dataset.circleTab || '带货发圈';
-        setAnnotationContext(circleType === '宣发' ? 'circle-publicity' : 'circle-sales');
+        setAnnotationContext(circleAnnotationContext(circleType));
         return;
       }
       if (activePage === '我的') {
@@ -2157,8 +2579,8 @@
       continuePendingAction();
     }
 
-    function beginCommissionDetails() {
-      prototypeUser.pendingAction = { type: 'commission-details' };
+    function beginPerformanceDetails() {
+      prototypeUser.pendingAction = { type: 'performance-details' };
       continuePendingAction();
     }
 
@@ -2168,7 +2590,7 @@
     }
 
     function hideRelationViews(exceptId = null) {
-      ['searchResultsView', 'tutorialView', 'withdrawRecordsView', 'commissionView', 'fansView', 'inviteView', 'inviteMessageView', 'inviteRegisterView'].forEach(viewId => {
+      ['searchResultsView', 'tutorialView', 'withdrawRecordsView', 'performanceDetailsView', 'fansView', 'inviteView', 'inviteMessageView', 'inviteRegisterView'].forEach(viewId => {
         if (viewId !== exceptId) document.getElementById(viewId).hidden = true;
       });
     }
@@ -2217,7 +2639,7 @@
         searchable: card.textContent,
         action: () => notify(card.dataset.action || '跳转微信视频号')
       }));
-      const circleItems = [...document.querySelectorAll('.circle-card')].map(card => ({
+      const circleItems = [...document.querySelectorAll('.circle-card[data-circle-source]:not([data-favorite-clone])')].map(card => ({
         type: 'circle',
         title: card.querySelector('.circle-author strong')?.textContent.trim() || '发圈素材',
         meta: card.querySelector('.circle-copy')?.textContent.trim() || '发圈素材',
@@ -2340,28 +2762,49 @@
       setAnnotationContext('my');
     }
 
-    function setCommissionFilter(status) {
-      document.querySelectorAll('[data-commission-filter]').forEach(item => {
-        const isActive = item.dataset.commissionFilter === status;
+    const performanceRangeData = {
+      '全部': { amount: '¥18,760.00', orders: '128', income: '¥2,286.60' },
+      '今日': { amount: '¥468.00', orders: '3', income: '¥56.16' },
+      '近7日': { amount: '¥3,286.00', orders: '22', income: '¥396.32' },
+      '近30日': { amount: '¥12,840.00', orders: '86', income: '¥1,548.80' }
+    };
+    let currentPerformanceRange = '全部';
+
+    function setPerformanceRange(range) {
+      if (!performanceRangeData[range]) return;
+      currentPerformanceRange = range;
+      document.querySelectorAll('[data-performance-range]').forEach(item => {
+        const isActive = item.dataset.performanceRange === range;
         item.classList.toggle('active', isActive);
         item.setAttribute('aria-selected', String(isActive));
       });
+      document.querySelectorAll('[data-performance-detail-range]').forEach(item => {
+        const isActive = item.dataset.performanceDetailRange === range;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-selected', String(isActive));
+      });
+      Object.entries(performanceRangeData[range]).forEach(([metric, value]) => {
+        document.querySelectorAll(`[data-performance-metric="${metric}"], [data-performance-detail-metric="${metric}"]`).forEach(item => {
+          item.textContent = prototypeUser.promoterAuthorized ? value : '--';
+        });
+      });
       let visibleCount = 0;
-      document.querySelectorAll('[data-commission-order]').forEach(order => {
-        const isVisible = status === '全部' || order.dataset.commissionOrder === status;
+      document.querySelectorAll('[data-performance-order-ranges]').forEach(order => {
+        const isVisible = order.dataset.performanceOrderRanges.split(' ').includes(range);
         order.hidden = !isVisible;
         if (isVisible) visibleCount += 1;
       });
-      document.getElementById('commissionEmpty').hidden = visibleCount > 0;
+      document.getElementById('performanceOrderCount').textContent = `共 ${visibleCount} 笔`;
+      document.getElementById('performanceOrderEmpty').hidden = visibleCount > 0;
     }
 
-    function openCommissionView() {
-      setCommissionFilter('全部');
-      openRelationView('commissionView', 'commission-details', 'commission-details');
+    function openPerformanceDetailsView() {
+      setPerformanceRange(currentPerformanceRange);
+      openRelationView('performanceDetailsView', 'performance-details', 'performance-details');
     }
 
-    function closeCommissionView() {
-      document.getElementById('commissionView').hidden = true;
+    function closePerformanceDetailsView() {
+      document.getElementById('performanceDetailsView').hidden = true;
       const treeRoot = document.querySelector('[data-tree-page="我的"][data-tree-root="true"]');
       if (treeRoot) setTreeActive(treeRoot);
       setAnnotationContext('my');
@@ -2776,9 +3219,9 @@
         openWithdrawView();
         return;
       }
-      if (pendingAction.type === 'commission-details') {
+      if (pendingAction.type === 'performance-details') {
         prototypeUser.pendingAction = null;
-        openCommissionView();
+        openPerformanceDetailsView();
         return;
       }
       if (pendingAction.type === 'withdraw-records') {
@@ -2985,6 +3428,97 @@
       item.addEventListener('click', () => switchMediaTab(item.dataset.mediaTab));
     });
 
+    function filterVideoCategory(category) {
+      let visibleCount = 0;
+      document.querySelectorAll('[data-video-category-filter]').forEach(item => {
+        const isActive = item.dataset.videoCategoryFilter === category;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-selected', String(isActive));
+      });
+      document.querySelectorAll('.video-card[data-video-category]').forEach(card => {
+        const isVisible = category === '精选' || card.dataset.videoCategory === category;
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+      const emptyState = document.querySelector('[data-video-category-empty]');
+      if (emptyState) emptyState.hidden = visibleCount > 0;
+      document.getElementById('mediaScroll').scrollTop = 0;
+    }
+
+    document.querySelectorAll('[data-video-category-filter]').forEach(item => {
+      item.addEventListener('click', () => filterVideoCategory(item.dataset.videoCategoryFilter));
+    });
+
+    const favoriteCircleIds = new Set();
+
+    function circleAnnotationContext(circleType) {
+      if (circleType === '宣发') return 'circle-publicity';
+      if (circleType === '收藏') return 'circle-favorites';
+      return 'circle-sales';
+    }
+
+    function syncCircleFavoriteButtons(itemId) {
+      const isFavorite = favoriteCircleIds.has(itemId);
+      document.querySelectorAll('.circle-card[data-circle-item-id]').forEach(card => {
+        if (card.dataset.circleItemId !== itemId) return;
+        const button = card.querySelector('[data-circle-favorite]');
+        if (!button) return;
+        button.setAttribute('aria-pressed', String(isFavorite));
+        button.textContent = isFavorite ? '★ 已收藏' : '☆ 收藏';
+      });
+    }
+
+    function renderFavoriteFeed() {
+      const feed = document.querySelector('[data-favorite-feed]');
+      const emptyState = document.querySelector('[data-favorite-empty]');
+      const count = document.querySelector('[data-favorite-count]');
+      if (!feed || !emptyState || !count) return;
+      feed.innerHTML = '';
+      [...favoriteCircleIds].reverse().forEach(itemId => {
+        const source = [...document.querySelectorAll('.circle-card[data-circle-source]:not([data-favorite-clone])')]
+          .find(card => card.dataset.circleItemId === itemId);
+        if (!source) return;
+        const clone = source.cloneNode(true);
+        clone.dataset.favoriteClone = 'true';
+        const sourceTag = document.createElement('span');
+        sourceTag.className = 'favorite-source-tag';
+        sourceTag.textContent = `来源：${source.dataset.circleSource}`;
+        const favoriteButton = clone.querySelector('[data-circle-favorite]');
+        if (favoriteButton) favoriteButton.insertAdjacentElement('afterend', sourceTag);
+        clone.querySelectorAll('[data-circle-share]').forEach(item => {
+          item.addEventListener('click', () => beginCircleShare(item.dataset.circleShare));
+        });
+        clone.querySelectorAll('[data-action]').forEach(item => {
+          item.addEventListener('click', event => {
+            event.stopPropagation();
+            notify(item.dataset.action);
+          });
+        });
+        feed.appendChild(clone);
+        syncCircleFavoriteButtons(itemId);
+      });
+      const visibleCount = feed.querySelectorAll('.circle-card').length;
+      count.textContent = `共 ${visibleCount} 条`;
+      emptyState.hidden = visibleCount > 0;
+    }
+
+    function toggleCircleFavorite(itemId) {
+      if (!itemId) return;
+      const isRemoving = favoriteCircleIds.has(itemId);
+      if (isRemoving) favoriteCircleIds.delete(itemId);
+      else favoriteCircleIds.add(itemId);
+      syncCircleFavoriteButtons(itemId);
+      renderFavoriteFeed();
+      notify(isRemoving ? '已取消收藏' : '已收藏，同步到收藏 Feed');
+    }
+
+    document.addEventListener('click', event => {
+      const favoriteButton = event.target.closest('[data-circle-favorite]');
+      if (!favoriteButton) return;
+      const card = favoriteButton.closest('.circle-card');
+      if (card) toggleCircleFavorite(card.dataset.circleItemId);
+    });
+
     function switchCircleTab(circleType) {
       document.querySelectorAll('[data-circle-tab]').forEach(item => {
         const isActive = item.dataset.circleTab === circleType;
@@ -2995,12 +3529,13 @@
         panel.hidden = panel.dataset.circlePanel !== circleType;
       });
       document.getElementById('circleScroll').scrollTop = 0;
+      if (circleType === '收藏') renderFavoriteFeed();
       const treeTarget = document.querySelector(`[data-tree-circle="${circleType}"]`);
       if (treeTarget) setTreeActive(treeTarget);
       const circlePageVisible = !document.querySelector('[data-page="发圈"]').hidden;
       const overlayHidden = document.getElementById('flowOverlay').hidden;
       if (circlePageVisible && overlayHidden) {
-        setAnnotationContext(circleType === '宣发' ? 'circle-publicity' : 'circle-sales');
+        setAnnotationContext(circleAnnotationContext(circleType));
       }
     }
 
@@ -3051,6 +3586,11 @@
       document.querySelectorAll('[data-header]').forEach(header => {
         header.hidden = header.dataset.header !== pageName;
       });
+      const homeFloatingEntry = document.querySelector('[data-home-floating]');
+      if (homeFloatingEntry) {
+        homeFloatingEntry.hidden = pageName !== '首页';
+        homeFloatingEntry.classList.remove('is-scrolling');
+      }
       if (pageName === '我的') updateMyPage();
       targetPage.scrollTop = 0;
       const treeRoot = document.querySelector(`[data-tree-page="${pageName}"][data-tree-root="true"]`);
@@ -3062,7 +3602,7 @@
         setAnnotationContext('category');
       } else if (pageName === '发圈') {
         const circleType = document.querySelector('[data-circle-tab].active')?.dataset.circleTab || '带货发圈';
-        setAnnotationContext(circleType === '宣发' ? 'circle-publicity' : 'circle-sales');
+        setAnnotationContext(circleAnnotationContext(circleType));
       } else if (pageName === '我的') {
         setAnnotationContext('my');
       } else {
@@ -3072,6 +3612,13 @@
 
     document.querySelectorAll('[data-nav]').forEach(item => {
       item.addEventListener('click', () => switchPage(item.dataset.nav));
+    });
+
+    document.querySelectorAll('[data-home-video-more]').forEach(item => {
+      item.addEventListener('click', () => {
+        switchPage('直播视频');
+        switchMediaTab('视频');
+      });
     });
 
     document.querySelectorAll('[data-tree-toggle]').forEach(item => {
@@ -3114,9 +3661,9 @@
           } else if (overlayName === 'personal-info') {
             switchPage('我的');
             beginPersonalInfo();
-          } else if (overlayName === 'commission-details') {
+          } else if (overlayName === 'performance-details') {
             switchPage('我的');
-            openCommissionView();
+            openPerformanceDetailsView();
           } else if (overlayName === 'withdraw-records') {
             switchPage('我的');
             openWithdrawalRecordsView();
@@ -3183,22 +3730,19 @@
     });
     document.querySelector('[data-fans-entry]').addEventListener('click', beginFans);
     document.querySelector('[data-invite-entry]').addEventListener('click', beginInvite);
-    document.querySelector('[data-commission-entry]').addEventListener('click', beginCommissionDetails);
-    document.querySelector('[data-commission-back]').addEventListener('click', closeCommissionView);
+    document.querySelector('[data-performance-entry]').addEventListener('click', beginPerformanceDetails);
+    document.querySelector('[data-performance-back]').addEventListener('click', closePerformanceDetailsView);
+    document.querySelectorAll('[data-performance-range]').forEach(item => {
+      item.addEventListener('click', () => setPerformanceRange(item.dataset.performanceRange));
+    });
+    document.querySelectorAll('[data-performance-detail-range]').forEach(item => {
+      item.addEventListener('click', () => setPerformanceRange(item.dataset.performanceDetailRange));
+    });
     document.querySelector('[data-withdraw-records-entry]').addEventListener('click', beginWithdrawalRecords);
     document.querySelector('[data-withdraw-records-back]').addEventListener('click', closeWithdrawalRecordsView);
     document.querySelector('[data-search-results-back]').addEventListener('click', closeSearchResults);
     document.querySelectorAll('[data-withdraw-record-filter]').forEach(item => {
       item.addEventListener('click', () => setWithdrawalRecordFilter(item.dataset.withdrawRecordFilter));
-    });
-    document.querySelectorAll('[data-commission-filter]').forEach(item => {
-      item.addEventListener('click', () => setCommissionFilter(item.dataset.commissionFilter));
-    });
-    document.querySelector('[data-commission-time]').addEventListener('click', event => {
-      const timeOptions = ['近30天⌄', '本月⌄', '全部时间⌄'];
-      const currentIndex = timeOptions.indexOf(event.currentTarget.textContent);
-      event.currentTarget.textContent = timeOptions[(currentIndex + 1) % timeOptions.length];
-      notify(`时间筛选：${event.currentTarget.textContent.replace('⌄', '')}`);
     });
     document.querySelectorAll('[data-copy-order]').forEach(item => {
       item.addEventListener('click', () => copyOrderNumber(item.dataset.copyOrder));
@@ -3459,8 +4003,16 @@
       document.getElementById('productDetailView').hidden = true;
       hideRelationViews();
       switchPage('首页');
+      setHomeLiveDemo(true);
       updatePrototypeState();
       notify('已重置为未登录状态');
+    });
+
+    document.querySelector('[data-home-live-demo]').addEventListener('click', event => {
+      const hasLive = event.currentTarget.getAttribute('aria-pressed') === 'true';
+      setHomeLiveDemo(hasLive);
+      document.getElementById('appScroll').scrollTo({ top: document.querySelector('.home-mixed-layout').offsetTop - 12, behavior: 'smooth' });
+      notify(hasLive ? '已恢复直播商品混排' : '当前无有效直播，商品卡自动适配');
     });
 
     document.querySelectorAll('[data-search-form]').forEach(form => {
@@ -3475,6 +4027,8 @@
       });
     });
 
+    initializeHomeLiveCarousel();
+    initializeHomeFloatingScroll();
     updatePrototypeState();
     setAnnotationContext('home');
   </script>
